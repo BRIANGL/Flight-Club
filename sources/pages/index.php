@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Flight Club</title>
+    <title>Accueil - Flight Club</title>
     <meta name="description" content="TPI GOLAY Brian">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=2fc55c83fda89d85c10ec2813155ab55">
     <link rel="manifest" href="manifest.json?h=44264fee9c6d05944711595970c43d33">
@@ -25,7 +25,15 @@
             <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/image4.jpg?h=0adc0de9a17a7caea6b8641f5d6ae02c&quot;);color:rgba(9, 162, 255, 0.85);">
                 <div class="text">
                     <h2>Flight Club</h2>
-                    <p>Un design qui déchire</p><button class="btn btn-outline-light btn-lg" type="button">Learn More</button>
+                    <?php
+                    if ($_SESSION['connected']) { ?>
+                        <p>Un carnet de vol disponnible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=registerAFlight">Enregistrer un vol</a>
+                    <?php
+                    } else { ?>
+                        <p>Un carnet de vol disponnible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=login">Enregistrer un vol</a>
+                    <?php }
+                    ?>
+
                 </div>
             </section>
             <section class="clean-block clean-info dark">

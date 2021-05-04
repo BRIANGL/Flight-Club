@@ -152,4 +152,45 @@ class GroupDAO
             ":date" => $dateTime
         ]);
     }
+
+
+    /**
+     * Create and send an invitation to an user
+     *
+     * @param int $idGroup
+     * @param int $idUser
+     * @return void
+     */
+    public static function CreateInvite($idGroup, $idUser)
+    {
+        $dateTime = date("Y-m-d H:i:s");
+        $db = DBConnection::getConnection();
+        $sql = "INSERT INTO `tbl_user-group` (`Id_User`, `Id_Group`, `Dttm_Invitation`, `Dttm_Membership`) VALUES (:idUser, :idGroup, :date, null);";
+
+        $request = $db->prepare($sql);
+        $request->execute([
+            ":idGroup" => $idGroup,
+            ":idUser" => $idUser,
+            ":date" => $dateTime
+        ]);
+    }
+
+
+    /**
+     * return the user group data with the group Id and user id
+     *
+     * @param int $idGroup
+     * @return array[mixed] all group data
+     */
+    public static function getMyGroupById($idGroup, $idUser)
+    {
+        $db = DBConnection::getConnection();
+        $sql = "SELECT * FROM `tbl_user-group` WHERE `Id_Group` = :idGroup AND `Id_User` = :idUser AND Dttm_Membership is not null";
+        $request = $db->prepare($sql);
+        $request->execute([
+            ':idGroup' => $idGroup,
+            ':idUser' => $idUser
+        ]);
+        return $request->fetch();
+    }
 }

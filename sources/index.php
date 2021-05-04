@@ -61,6 +61,12 @@ if (isset($page)) {
         case 'CreateGroups':
             require("./pages/GroupCreate.php");
             break;
+        case 'aboutGroup':
+            require("./pages/aboutGroup.php");
+            break;
+        case 'InviteAMember':
+            require("./pages/GroupInviteAMember.php");
+            break;
         case '404':
             require("./pages/404.php");
             break;
