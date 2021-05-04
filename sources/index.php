@@ -35,19 +35,31 @@ if (isset($page)) {
     //we show the desired page
     switch ($page) {
         case 'register':
-            require("./pages/registration.php");
+            require("./pages/Registration.php");
             break;
         case 'userModify':
             require("./pages/UserModify.php");
             break;
         case 'login':
-            require("./pages/login.php");
+            require("./pages/Login.php");
             break;
         case 'logout':
             require("./pages/Logout.php");
             break;
         case 'homepage':
-            require("./pages/index.php");
+            require("./pages/Index.php");
+            break;
+        case 'GroupMenu':
+            require("./pages/GroupMenu.php");
+            break;
+        case 'invite':
+            require("./pages/GroupInvites.php");
+            break;
+        case 'myGroupes':
+            require("./pages/myGroup.php");
+            break;
+        case 'CreateGroups':
+            require("./pages/GroupCreate.php");
             break;
         case '404':
             require("./pages/404.php");
@@ -56,5 +68,5 @@ if (isset($page)) {
             require("./pages/404.php");
     }
 } else {
-    require("./pages/homepage.php");
+    require("./pages/Index.php");
 }

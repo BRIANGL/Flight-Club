@@ -131,8 +131,8 @@ DROP TABLE IF EXISTS `flightclub`.`tbl_user-group` ;
 CREATE TABLE IF NOT EXISTS `flightclub`.`tbl_user-group` (
   `Id_User` INT NOT NULL,
   `Id_Group` INT NOT NULL,
-  `Dttm_Invitation` DATETIME NOT NULL,
-  `Dttm_Membership` DATETIME NOT NULL,
+  `Dttm_Invitation` DATETIME,
+  `Dttm_Membership` DATETIME,
   PRIMARY KEY (`Id_User`, `Id_Group`),
   INDEX `fk_tbl_user-group_tbl_group1_idx` (`Id_Group` ASC),
   CONSTRAINT `tbl_user-group_ibfk_1`

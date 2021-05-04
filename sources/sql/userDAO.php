@@ -11,6 +11,9 @@ use FlightClub\sql\DBConnection;
 
 require_once 'dbConnection.php';
 
+/**
+ * User related class that contain user related functions with database interraction
+ */
 class UserDAO
 {
 
@@ -124,6 +127,12 @@ class UserDAO
         return $result;
     }
 
+    /**
+     * Get all user data from their email
+     *
+     * @param string $email
+     * @return array[mixed]
+     */
     public static function readUsersByEmail($email)
     {
         $db = DBConnection::getConnection();
@@ -138,44 +147,12 @@ class UserDAO
         return $result;
     }
 
-    public static function readPhone($phone)
-    {
-        $db = DBConnection::getConnection();
-        $sql = "SELECT `Tel` FROM `tbl_user` WHERE `Tel` = :tel";
-
-        $query = $db->prepare($sql);
-
-        $query->execute([
-            ':tel' => $phone
-        ]);
-
-        $result = $query->fetch();
-        return $result;
-    }
-    public static function changeUser($id, $newEmail, $newAdresse, $newNpa, $newLocalite, $newTelephone, $role)
-    {
-        $db = DBConnection::getConnection();
-        $sql = "UPDATE `tbl_user` SET `Email` = :email, `Rue` = :adresse, `Npa` = :npa, `Lieu` = :localite, `Tel` = :telephone, `Role` = :role WHERE `tbl_user`.`idUser` = :id";
-
-
-        $query = $db->prepare($sql);
-
-        $query->execute([
-            ':id' => $id,
-            ':email' => $newEmail,
-            ':adresse' => $newAdresse,
-            ':npa' => $newNpa,
-            ':localite' => $newLocalite,
-            ':telephone' => $newTelephone,
-            ':role' => $role
-        ]);
-    }
     /**
      * Change the password of an user identified by his ID
      *
      * @param int $id
-     * @param [type] $password
-     * @param [type] $salt
+     * @param string $password
+     * @param string $salt
      * @return void
      */
     public static function changePassword($id, $password, $salt)
@@ -191,31 +168,5 @@ class UserDAO
             ':salt' => $salt,
             ':password' => $password
         ]);
-    }
-
-    public static function getUserOrders($idUser)
-    {
-        $db = DBConnection::getConnection();
-        $sql = "SELECT * FROM `t_commande` WHERE `idUser` = :idUser ORDER BY `dateCommande` DESC";
-
-        $request = $db->prepare($sql);
-        $request->execute([
-            ':idUser' => $idUser
-        ]);
-
-        $result = $request->fetchAll();
-        return $result;
-    }
-
-    public static function getAllUserOrders()
-    {
-        $db = DBConnection::getConnection();
-        $sql = "SELECT * FROM `t_commande` ORDER BY `dateCommande` DESC";
-
-        $request = $db->prepare($sql);
-        $request->execute();
-
-        $result = $request->fetchAll();
-        return $result;
     }
 }

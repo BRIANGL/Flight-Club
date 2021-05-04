@@ -1,10 +1,13 @@
 <?php
+
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
- * login page here
+ * Group menu page here
  */
-require_once("./controllers/login_controller.php");
+
+require_once("./controllers/groupMenu_controller.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,7 +15,7 @@ require_once("./controllers/login_controller.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login - Flight Club</title>
+    <title>Groupes menu - Flight Club</title>
     <meta name="description" content="Flight Club">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=dce1ced0acba79984dca99bab3de3321">
     <link rel="manifest" href="manifest.json?h=3376faf9af9d01ed3ad3ca66d606c630">
@@ -25,30 +28,29 @@ require_once("./controllers/login_controller.php");
 </head>
 
 <body style="display: flex;flex-direction: column;height: 100vh;">
-<div style="flex: 1 0 auto;">
-    <?php
-    require_once("./assets/php/nav.php");
-    ?>
-    <main class="page login-page">
-        <section class="clean-block clean-form dark">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Se connecter</h2>
-                    <p>Connectez vous pour enregistrer vos vols</p>
+    <div style="flex: 1 0 auto;">
+        <?php
+        require_once("./assets/php/nav.php");
+        ?>
+        <main class="page login-page">
+            <section class="clean-block clean-form dark">
+                <div class="container">
+                    <div class="block-heading">
+                        <h2 class="text-info">Groupes</h2>
+                        <p>Gérez vos groupes!</p>
+                    </div>
+                    <form>
+                        <table>
+                            <tr>
+                                <td><a href="?page=invite" class="btn btn-primary">Mes invitations</a></td>
+                                <td><a href="?page=myGroupes" class="btn btn-primary">Mes groupes</a></td>
+                                <td><a href="?page=CreateGroups" class="btn btn-primary">Créer un groupe</a></td>
+                            </tr>
+                        </table>                        
+                    </form>
                 </div>
-                <form method="POST" action="">
-                    <?php if ($message != "") { ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Erreur !</strong> <?= $message ?>
-                        </div>
-                    <?php } ?>
-                    <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" required></div>
-                    <div class="mb-3"><label class="form-label" for="password">Mot de passe</label><input class="form-control" type="password" id="password" name="password" required></div>
-                    <button class="btn btn-primary" type="submit">Se connecter</button>
-                </form>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
     </div><!-- Start: Footer Dark -->
     <?php
     require_once("./assets/php/footer.php");
