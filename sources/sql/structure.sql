@@ -13,6 +13,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP SCHEMA IF EXISTS `flightclub` ;
 
 -- -----------------------------------------------------
+-- Create user
+-- -----------------------------------------------------
+CREATE USER 'FlighcClubDbUser'@'localhost' IDENTIFIED WITH mysql_native_password AS '***';GRANT USAGE ON *.* TO 'FlighcClubDbUser'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `FlighcClubDbUser\_%`.* TO 'FlighcClubDbUser'@'localhost';GRANT ALL PRIVILEGES ON `flightclub`.* TO 'FlighcClubDbUser'@'localhost';
+
+-- -----------------------------------------------------
 -- Schema flightclub
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `flightclub` DEFAULT CHARACTER SET utf8 ;
@@ -88,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `flightclub`.`tbl_user` (
   `Id_User` INT NOT NULL AUTO_INCREMENT,
   `Txt_Email` VARCHAR(100) NOT NULL,
   `Txt_Password_Hash` VARCHAR(128) NOT NULL,
-  `TxtPassword_Salt` VARCHAR(45) NOT NULL,
+  `Txt_Password_Salt` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`Id_User`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
