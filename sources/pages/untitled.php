@@ -16,21 +16,11 @@
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css?h=e737f76df021b46fa7180f48799a5d20">
 </head>
 
-<body>
-    <!-- Start: Header White -->
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="#">TPI</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item item"><a class="nav-link" href="/">HOME</a></li>
-                    <li class="nav-item item"><a class="nav-link" href="features.html">FEATURES</a></li>
-                    <li class="nav-item item"><a class="nav-link" href="pricing.html">PRICING</a></li>
-                    <li class="nav-item item"><a class="nav-link" href="about-us.html">ABOUT</a></li>
-                    <li class="nav-item item"><a class="nav-link" href="contact-us.html">CONTACT US</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav><!-- End: Header White -->
+<body style="display: flex;flex-direction: column;height: 100vh;">
+    <div style="flex: 1 0 auto;">
+        <?php
+        require_once("./assets/php/nav.php");
+        ?>
     <!-- Start: Contact Us Form -->
     <section class="clean-block clean-form dark">
         <div class="container">
@@ -62,48 +52,12 @@
             </form>
         </div>
     </section><!-- End: Contact Us Form -->
+    </div>
     <!-- Start: Footer Dark -->
-    <footer class="page-footer dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Downloads</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
-                        <li><a href="#">Forums</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <p>© 2021 Copyright Text</p>
-        </div>
-    </footer><!-- End: Footer Dark -->
+    <?php
+    require_once("./assets/php/footer.php");
+    ?>
+    <!-- End: Footer Dark -->
     <script src="assets/bootstrap/js/bootstrap.min.js?h=1eb47230ed13e88113270f63f470e160"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/vanilla-zoom.js?h=6a37ea9c996b05f763161c73127d66bc"></script>

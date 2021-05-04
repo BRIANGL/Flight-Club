@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
@@ -36,6 +37,9 @@ if (isset($page)) {
         case 'register':
             require("./pages/registration.php");
             break;
+        case 'userModify':
+            require("./pages/UserModify.php");
+            break;
         case 'login':
             require("./pages/login.php");
             break;
@@ -45,59 +49,8 @@ if (isset($page)) {
         case 'homepage':
             require("./pages/index.php");
             break;
-        case 'product':
-            require("./pages/products.php");
-            break;
-        case 'aboutProduct':
-            require("./pages/aboutProduct.php");
-            break;
-        case 'cart':
-            require("./pages/cart.php");
-            break;
-        case 'account':
-            require("./pages/utilisateur.php");
-            break;
-        case 'user':
-            require("./pages/utilisateurChoix.php");
-            break;
-        case 'userOrder':
-            require("./pages/userOrder.php");
-            break;
-        case 'admin':
-            require("./pages/adminMenu.php");
-            break;
-        case 'addproduct':
-            require("./pages/AdminAddProduct.php");
-            break;
-        case 'confirm':
-            require("./pages/confirmation.php");
-            break;
-        case 'addAdresses':
-            require("./pages/AjoutAdresse.php");
-            break;
-        case 'about':
-            require("./pages/about.php");
-            break;
-        case 'forgetPassword':
-            require("./pages/forgetPassword.php");
-            break;
-        case 'modifyPassword':
-            require("./pages/modifyPassword.php");
-            break;
         case '404':
             require("./pages/404.php");
-            break;
-        case 'adminAdd':
-            require("./pages/Admin.php");
-            break;
-        case 'adminOrder':
-            require("./pages/adminOrder.php");
-            break;
-        case 'adminOrderModify':
-            require("./pages/adminOrderModify.php");
-            break;
-        case 'conditionUtilisation':
-            require("./pages/CG.php");
             break;
         default:
             require("./pages/404.php");

@@ -1,7 +1,9 @@
 <?php
-/*
-FICHIER CONTENANT TOUTES LES FONCTIONS EN RAPPORT AVEC LA TABLE "user"
-*/
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * User-related functions
+ */
 
 namespace FlightClub\sql;
 
@@ -12,6 +14,13 @@ require_once 'dbConnection.php';
 class UserDAO
 {
 
+    /**
+     * Get users for making a pagination
+     *
+     * @param [type] $offset
+     * @param [type] $limit
+     * @return void
+     */
     public static function getUsers($offset = null, $limit = null)
     {
         $db = DBConnection::getConnection();
@@ -29,6 +38,11 @@ class UserDAO
         return $request->fetchAll();
     }
 
+    /**
+     * Count the number of users
+     *
+     * @return int number of users
+     */
     public static function countUsers()
     {
         $db = DBConnection::getConnection();
@@ -39,10 +53,16 @@ class UserDAO
         return $information;
     }
 
+    /**
+     * Get all data from an user with his ID
+     *
+     * @param int $userID
+     * @return array[mixed]
+     */
     public static function getUserByID($userID)
     {
         $db = DBConnection::getConnection();
-        $sql = "SELECT * FROM tbl_user WHERE idUser = :userID";
+        $sql = "SELECT * FROM tbl_user WHERE Id_User = :userID";
         $request = $db->prepare($sql);
         $request->execute([':userID' => $userID]);
         return $request->fetch();
@@ -150,16 +170,25 @@ class UserDAO
             ':role' => $role
         ]);
     }
-    public static function changePassword($id, $password)
+    /**
+     * Change the password of an user identified by his ID
+     *
+     * @param int $id
+     * @param [type] $password
+     * @param [type] $salt
+     * @return void
+     */
+    public static function changePassword($id, $password, $salt)
     {
         $db = DBConnection::getConnection();
-        $sql = "UPDATE `tbl_user` SET `Password` = :password WHERE `tbl_user`.`idUser` = :id";
+        $sql = "UPDATE `tbl_user` SET `Txt_Password_Hash` = :password, `Txt_Password_Salt` = :salt WHERE `tbl_user`.`Id_User` = :id";
 
 
         $query = $db->prepare($sql);
 
         $query->execute([
             ':id' => $id,
+            ':salt' => $salt,
             ':password' => $password
         ]);
     }
