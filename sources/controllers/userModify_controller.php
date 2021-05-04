@@ -31,21 +31,26 @@ if (!empty($newPassword) && !empty($repeatNewPassword) && !empty($oldPassword)) 
 
     //we compare the hashed password of the user with the one in the database
     if (password_verify($hashed, userDAO::getUserByEmail(UserDAO::getUserByID($_SESSION['userID'])['Txt_Email'])['Txt_Password_Salt'])) {
+        //we check that booth of the new password are the same
+        if ($newPassword == $repeatNewPassword) {
+            //we hash the new password to make it work with the login
+            $hashed = hash('sha512', $newPassword);
+            $salted = substr($hashed, 0, 20) . $hashed . substr($hashed, 50, 70);
+            $hashed = hash('sha512', $salted);
 
-        //we hash the new password to make it work with the login
-        $hashed = hash('sha512', $newPassword);
-        $salted = substr($hashed, 0, 20) . $hashed . substr($hashed, 50, 70);
-        $hashed = hash('sha512', $salted);
+            //we create a salt with the new password
+            $salt = password_hash($hashed, PASSWORD_BCRYPT);
 
-        //we create a salt with the new password
-        $salt = password_hash($hashed, PASSWORD_BCRYPT);
-
-        //we update the password in the database
-        UserDAO::changePassword($_SESSION['userID'], $hashed, $salt);
-        //we display a success message to the user
-        $messageSucces = "Mot de passe changé avec succès";
+            //we update the password in the database
+            UserDAO::changePassword($_SESSION['userID'], $hashed, $salt);
+            //we display a success message to the user
+            $messageSucces = "Mot de passe changé avec succès";
+        }else {
+                //we display an error message to the user
+        $messageErreur = "Les 2 mot de passe saisis ne sont pas identiques!";
+        }
     } else {
-         //we display an error message to the user
+        //we display an error message to the user
         $messageErreur = "Mauvais mot de passe!";
     }
 }

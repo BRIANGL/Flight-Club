@@ -1,16 +1,12 @@
 <?php
-//supprime la session
+//start a session
 session_start();
 $_SESSION = array();
-//supprime les cookies
+//remove all cookies and destroy the session
 if (ini_get("session.use_cookies")) {
     setcookie(session_name(), '', 0);
 }
 session_destroy();
-//redirige vers login
-if (filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) == "profile") {
-    header("Location: ./index.php?page=homepage");
-} else {
-    header("Location: ./index.php?page=homepage");
-}
+//redirect the user to the homepage
+header("Location: ./index.php?page=homepage");
 exit;
