@@ -22,15 +22,15 @@
         require_once("./assets/php/nav.php");
         ?>
         <main class="page landing-page">
-            <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/image4.jpg?h=0adc0de9a17a7caea6b8641f5d6ae02c&quot;);color:rgba(9, 162, 255, 0.85);">
+        <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/HeadImg.png&quot;);color: rgba(9, 162, 255, 0.85);">
                 <div class="text">
                     <h2>Flight Club</h2>
                     <?php
                     if ($_SESSION['connected']) { ?>
-                        <p>Un carnet de vol disponnible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=registerAFlight">Enregistrer un vol</a>
+                        <p>Un carnet de vol disponible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=registerAFlight">Enregistrer un vol</a>
                     <?php
                     } else { ?>
-                        <p>Un carnet de vol disponnible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=login">Enregistrer un vol</a>
+                        <p>Un carnet de vol disponible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=login">Enregistrer un vol</a>
                     <?php }
                     ?>
 
@@ -39,16 +39,24 @@
             <section class="clean-block clean-info dark">
                 <div class="container">
                     <div class="block-heading">
-                        <h2 class="text-info">Info</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                        <h2 class="text-info">Flight Club</h2>
+                        <p>Vous en avez marre de noter vos heures de vol dans votre carnet qui reste à l'aéroclub? Ne cherchez pas plus loin, Flight Club est le carnet de vol disponible partout en 1 clique</p>
                     </div>
                     <div class="row align-items-center">
-                        <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg?h=5a16d46fccd884924ce66752802d76c5"></div>
+                        <div class="col-md-6"><img class="img-thumbnail" src="assets/img/DualTakeOff.png?h=5a16d46fccd884924ce66752802d76c5"></div>
                         <div class="col-md-6">
-                            <h3>Lorem impsum dolor sit amet</h3>
+                            <h3>En équipe</h3>
                             <div class="getting-started-info">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button>
+                                <p>Rejoignez un groupe de passionnés et volez sans retenue. Les heures de vol montent plus vite à plusieurs</p>
+                            </div>
+                            <?php
+                    if ($_SESSION['connected']) { ?>
+                        <a class="btn btn-outline-primary btn-lg" href="?page=GroupMenu">Rejoindre un groupe</a>
+                    <?php
+                    } else { ?>
+                        <a class="btn btn-outline-primary btn-lg" href="?page=login">Rejoindre un groupe</a>
+                    <?php }
+                    ?>
                         </div>
                     </div>
                 </div>
@@ -62,48 +70,23 @@
                     <div class="row justify-content-center">
                         <div class="col-md-5 feature-box"><i class="far fa-paper-plane icon"></i>
                             <h4>Rapide</h4>
-                            <p>Le site est rapide, léger et accessible en tout point</p>
+                            <p>Le site est rapide et léger</p>
                         </div>
                         <div class="col-md-5 feature-box"><i class="icon-pencil icon"></i>
-                            <h4>Modifiable</h4>
-                            <p>Modifiez vos vols en un clin d'oeuil</p>
+                            <h4>Simple</h4>
+                            <p>Enregistrez vos vol est super-facile</p>
                         </div>
                         <div class="col-md-5 feature-box"><i class="typcn typcn-weather-partly-sunny icon"></i>
                             <h4>Complet</h4>
-                            <p>Enregistrez les données de votre vol comme jamais avant avec des détails important&nbsp;</p>
+                            <p>Enregistrez les données de votre vol comme jamais auparavant avec des détails importants&nbsp;</p>
                         </div>
                         <div class="col-md-5 feature-box"><i class="icon-plane icon"></i>
                             <h4>Accessible dans le monde entier</h4>
-                            <p>Accédez a vos données dans le monde entier</p>
+                            <p>Accédez à vos données dans le monde entier</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="clean-block slider dark">
-                <div class="container">
-                    <div class="block-heading">
-                        <h2 class="text-info">Une vue imprenable</h2>
-                        <p>Des magnifiques images</p>
-                    </div>
-                    <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active"><img class="w-100 d-block" src="assets/img/scenery/image1.jpg?h=323a7e5d8e12e9b60d93996156594f41" alt="Slide Image"></div>
-                            <div class="carousel-item"><img class="w-100 d-block" src="assets/img/scenery/image4.jpg?h=ae7b4d25adfdfa1581297908235a949d" alt="Slide Image"></div>
-                            <div class="carousel-item"><img class="w-100 d-block" src="assets/img/scenery/image6.jpg?h=26f762ae21fd9cce95e86763ac6154ca" alt="Slide Image"></div>
-                        </div>
-                        <div>
-                            <!-- Start: Previous --><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><!-- End: Previous -->
-                            <!-- Start: Next --><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a><!-- End: Next -->
-                        </div>
-                        <ol class="carousel-indicators">
-                            <li data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></li>
-                            <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-                            <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
-                        </ol>
-                    </div>
-                </div>
-            </section>
-
         </main>
     </div><!-- Start: Footer Dark -->
     <?php

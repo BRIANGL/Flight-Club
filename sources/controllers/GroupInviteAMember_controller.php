@@ -40,16 +40,21 @@ if (empty($idGroup) || empty($groupDATA)) {
     header("Location: ./index.php?page=myGroupes");
     exit();
 }
-
+//we initialize the error and success messages
 $errorMessage = "";
 $successMessage = "";
+//we check that the email field is not empty
 if (!empty($email)) {
-
-    $idUser = UserDAO::getUserByEmail($email);
-    if (!empty($idUser)) {
-        GroupDAO::CreateInvite($idGroup, $idUser['Id_User']);
-        $successMessage = "Utilisateur invité!";
-    } else {
+    //we get all the user data and try to invite him
+    $userData = UserDAO::getUserByEmail($email);
+    try {
+        if (!empty($userData)) {//if the user is existing we invite him and show a success message
+            GroupDAO::CreateInvite($idGroup, $userData['Id_User']);
+            $successMessage = "Utilisateur invité!";
+        } else {//if the user doesn't exists, we show an error message
+            $errorMessage = "Oops, une erreur est survenue. Vérifiez l'adresse du destinataire";
+        }
+    } catch (\Throwable $th) {//if the user is already in the group or is already invited, we show an error message
         $errorMessage = "Oops, une erreur est survenue. Vérifiez l'adresse du destinataire";
     }
 }

@@ -6,7 +6,7 @@
  * Invite a group member page here
  */
 
-require_once("./controllers/GroupInviteAMember_controller.php");
+require_once("./controllers/groupInviteAMember_controller.php");
 
 ?>
 <!DOCTYPE html>

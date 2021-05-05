@@ -88,7 +88,7 @@ class GroupDAO
     /**
      * Get all groups of one user identified by his id
      *
-     * @param [type] $id
+     * @param int $id
      * @return array[mixed]
      */
     public static function getAllOfMyGroup($id)
@@ -98,6 +98,42 @@ class GroupDAO
         $request = $db->prepare($sql);
         $request->execute([
             ':id' => $id
+        ]);
+        return $request->fetchAll();
+    }
+
+    /**
+     * Get all users of one group identified by the group id
+     *
+     * @param int $idGroup
+     * @return array[mixed]
+     */
+    public static function getAllOfGroupUser($idGroup)
+    {
+        $db = DBConnection::getConnection();
+        $sql = "SELECT * FROM `tbl_user-group` join `tbl_user` on `tbl_user-group`.`Id_User` = `tbl_user`.`Id_User`  WHERE `Dttm_Membership` is not null AND `tbl_user-group`.`Id_Group` = :id";
+        $request = $db->prepare($sql);
+        $request->execute([
+            ':id' => $idGroup
+        ]);
+        return $request->fetchAll();
+    }
+
+    /**
+     * Get an users of one group identified by his id
+     *
+     * @param int $idGroup
+     * @param int $idUser
+     * @return array[mixed]
+     */
+    public static function getGroupUserByIdUserAndIdGroup($idUser, $idGroup)
+    {
+        $db = DBConnection::getConnection();
+        $sql = "SELECT * FROM `tbl_user-group` join `tbl_user` on `tbl_user-group`.`Id_User` = `tbl_user`.`Id_User`  WHERE `Dttm_Membership` is not null AND `tbl_user-group`.`Id_Group` = :idGroup AND `tbl_user-group`.`Id_User` = :idUser";
+        $request = $db->prepare($sql);
+        $request->execute([
+            ':iduser' => $idUser,
+            ':idGroup' => $idGroup
         ]);
         return $request->fetchAll();
     }

@@ -17,16 +17,24 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
-$leave = filter_input(INPUT_POST, "delete");
+//we check if the user has clicked on the leave button
+$leave = filter_input(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
 
+//remove the current user from a group
 if ($leave) {
     GroupDAO::deletePendingInvite($leave, $_SESSION['userID']);
 }
 
-
+/**
+ * Show all groups of the current user
+ *
+ * @return string
+ */
 function showGroups()
 {
+    //We get all of the groups that the user is in
     $MyGroups = GroupDAO::getAllOfMyGroup($_SESSION['userID']);
+    //if he is in a group or more, we show him his groups
     if (!empty($MyGroups)) {
         foreach ($MyGroups as $key => $value) {
             echo "<div class=\"card-group\">";
@@ -44,7 +52,7 @@ function showGroups()
 <?php
             echo "</div>";
         }
-    }else {
+    }else {//if not, we show him a message saying that he isn't in any group yet
             echo "<p>Vous n'appartenez à aucun groupe!</p>";
     }
 }
