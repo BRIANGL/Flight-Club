@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
@@ -17,13 +16,6 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
-//we check if the user has clicked on the leave button
-$leave = filter_input(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
-
-//remove the current user from a group
-if ($leave) {
-    GroupDAO::deletePendingInvite($leave, $_SESSION['userID']);
-}
 
 /**
  * Show all groups of the current user

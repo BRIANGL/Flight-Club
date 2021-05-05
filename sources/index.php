@@ -25,7 +25,7 @@ if ($page == null) {
     header('location: index.php?page=homepage');
 }
 
-//we initialize a session of connexion if it doesn't exists
+//we initialize a session of connection if it doesn't exists
 if (!isset($_SESSION['connected'])) {
     $_SESSION['connected'] = false;
 }
@@ -69,6 +69,18 @@ if (isset($page)) {
             break;
         case 'MemberList':
             require("./pages/GroupMemberList.php");
+            break;
+        case 'logbook':
+            require("./pages/UserLogBookMenu.php");
+            break;
+        case 'myFlights':
+            require("./pages/UserFlight.php");
+            break;
+        case 'addFlight':
+            require("./pages/UserAddFlight.php");
+            break;
+        case 'GroupLogBook':
+            require("./pages/GroupLogBook.php");
             break;
         case '404':
             require("./pages/404.php");

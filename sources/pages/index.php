@@ -27,7 +27,7 @@
                     <h2>Flight Club</h2>
                     <?php
                     if ($_SESSION['connected']) { ?>
-                        <p>Un carnet de vol disponible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=registerAFlight">Enregistrer un vol</a>
+                        <p>Un carnet de vol disponible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=logbook">Enregistrer un vol</a>
                     <?php
                     } else { ?>
                         <p>Un carnet de vol disponible partout dans le monde</p><a class="btn btn-outline-light btn-lg" href="?page=login">Enregistrer un vol</a>

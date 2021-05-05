@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
@@ -25,30 +26,30 @@ require_once("./controllers/login_controller.php");
 </head>
 
 <body style="display: flex;flex-direction: column;height: 100vh;">
-<div style="flex: 1 0 auto;">
-    <?php
-    require_once("./assets/php/nav.php");
-    ?>
-    <main class="page login-page">
-        <section class="clean-block clean-form dark">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Se connecter</h2>
-                    <p>Connectez vous pour enregistrer vos vols</p>
+    <div style="flex: 1 0 auto;">
+        <?php
+        require_once("./assets/php/nav.php");
+        ?>
+        <main class="page login-page">
+            <section class="clean-block clean-form dark">
+                <div class="container">
+                    <div class="block-heading">
+                        <h2 class="text-info">Se connecter</h2>
+                        <p>Connectez vous pour enregistrer vos vols</p>
+                    </div>
+                    <form method="POST" action="">
+                        <?php if ($message != "") { ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Erreur !</strong> <?= $message ?>
+                            </div>
+                        <?php } ?>
+                        <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" required></div>
+                        <div class="mb-3"><label class="form-label" for="password">Mot de passe</label><input class="form-control" type="password" id="password" name="password" required></div>
+                        <button class="btn btn-primary" type="submit">Se connecter</button>
+                    </form>
                 </div>
-                <form method="POST" action="">
-                    <?php if ($message != "") { ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Erreur !</strong> <?= $message ?>
-                        </div>
-                    <?php } ?>
-                    <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" required></div>
-                    <div class="mb-3"><label class="form-label" for="password">Mot de passe</label><input class="form-control" type="password" id="password" name="password" required></div>
-                    <button class="btn btn-primary" type="submit">Se connecter</button>
-                </form>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
     </div><!-- Start: Footer Dark -->
     <?php
     require_once("./assets/php/footer.php");

@@ -1,7 +1,13 @@
 <?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * Database connection functions
+ */
 namespace FlightClub\sql;
 require_once 'dbInfos.php';
 
+//we check if the user session is already existing. If not we initialize it
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = "";
 }
@@ -9,14 +15,17 @@ if (!isset($_SESSION['user'])) {
 
 
 class DBConnection {
-    static $conn = null; /* La connexion avec la base */
+    static $conn = null; //database connection
     const NOM_BASE = DB_NAME;
     const HOST = DB_HOST;
     const USER = DB_USER;
     const PWD = DB_PWD;
 
-    /*Retourne un objet de connection PDO NON-PERSISTANT
- * si la connection avec la BD réussi; si non, retourne null*/
+    /**
+     * Connection to the database function
+     *
+     * @return object return a non persistant connection object if the db connection was successful, else it return null
+     */
     private static function doConnection() {
         try {
             self::$conn = new \PDO(
@@ -31,6 +40,11 @@ class DBConnection {
         return self::$conn;
     }
 
+    /**
+     * create a new instance of a DB connection if not already existing
+     *
+     * @return object
+     */
     public static function getConnection() {
         if (self::$conn == null) {
             self:: doConnection();
@@ -38,5 +52,4 @@ class DBConnection {
         return self::$conn;
     }
   }
-  //GET CONNECTION: $db = DBConnection::getConnection();
  ?>

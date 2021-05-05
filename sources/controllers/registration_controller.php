@@ -25,29 +25,36 @@ if (isset($_SESSION['userID'])) {
  */
 function password_strength($password)
 {
+    //we check the length and initialize the default value for the return
     $password_length = 8;
     $returnVal = True;
 
+    //we check that the password is bigger than the password length
     if (strlen($password) < $password_length) {
         $returnVal = False;
     }
 
+    //we check that there is a number in the password
     if (!preg_match("#[0-9]+#", $password)) {
         $returnVal = False;
     }
 
+    //we check that there is at least one smaller character 
     if (!preg_match("#[a-z]+#", $password)) {
         $returnVal = False;
     }
 
+    //we check that there is at least one bigger character 
     if (!preg_match("#[A-Z]+#", $password)) {
         $returnVal = False;
     }
 
+    //we check that there is at least one special character 
     if (!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password)) {
         $returnVal = False;
     }
 
+    //we return the true if the password is ok or false if ko
     return $returnVal;
 }
 

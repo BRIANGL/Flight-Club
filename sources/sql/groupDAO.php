@@ -12,6 +12,9 @@ use FlightClub\sql\DBConnection;
 
 require_once 'dbConnection.php';
 
+/**
+ * Group related class that contain group related functions with database interraction
+ */
 class GroupDAO
 {
     /**
@@ -160,7 +163,8 @@ class GroupDAO
      *
      * @return array[mixed]
      */
-    public static function getLastGroupId(){
+    public static function getLastGroupId()
+    {
         $db = DBConnection::getConnection();
         $sql = "SELECT * FROM `tbl_group` order by `Id_Group` desc";
         $request = $db->prepare($sql);
