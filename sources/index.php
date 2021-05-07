@@ -88,6 +88,9 @@ if (isset($page)) {
         case 'logbookEdit':
             require("./pages/FlightEdit.php");
             break;
+        case 'download':
+            require("./pages/DownloadPDF.php");
+            break;
         case '404':
             require("./pages/404.php");
             break;

@@ -45,7 +45,12 @@ require_once("./controllers/groupCreate_controller.php");
                                 <strong>Succès !</strong> <?= $message ?>
                             </div>
                         <?php } ?>
-                        <div class="mb-3"><label class="form-label" for="name">Nom du groupe</label><input class="form-control item" type="text" id="name" name="name" required></div>
+                        <?php if ($errorMessage != "") { ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Erreur !</strong> <?= $errorMessage ?>
+                            </div>
+                        <?php } ?>
+                        <div class="mb-3"><label class="form-label" for="name">Nom du groupe</label><input class="form-control item" type="text" id="name" name="name" required maxlength="100"></div>
                         <div class="mb-3"> <input type="submit" class="btn btn-primary" value="Créer"></div>
                     </form>
                 </div>

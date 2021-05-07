@@ -36,6 +36,23 @@ class FlightDAO
     }
 
     /**
+     * Get all flight of an user with his id with only the data needed for the PDF
+     *
+     * @param int $idUser
+     * @return array[mixed]
+     */
+    public static function getAllUserFlightByUserIdForExportPDF($idUser)
+    {
+        $db = DBConnection::getConnection();
+        $sql = "SELECT `Cd_Role`, `No_Flight`, `Dt_Departure`, `Dt_Arrival`, `Tm_Departure`, `Tm_Arrival`, `Tm_Engine_On`, `Tm_Engine_Off`, `Nm_Plane`, `No_Plane`, `Cd_ICAO_Departure`, `Cd_ICAO_Arrival`, `Cd_Flight_Type`, `Cd_Flight_Mode`, `Nb_Passengers` FROM `tbl_flight` join `tbl_user-flight` on `tbl_flight`.`Id_Flight` = `tbl_user-flight`.`Id_Flight` WHERE `Id_User` = :idUser";
+        $request = $db->prepare($sql);
+        $request->execute([
+            ':idUser' => $idUser
+        ]);
+        return $request->fetchAll();
+    }
+
+    /**
      * Add a flight to the database
      *
      * @param int $idFlight
