@@ -70,6 +70,33 @@ function showFlight($users)
 }
 
 /**
+ * Function that take the time of each flight and put it in a total time
+ *
+ * @param array[mixed] $flight
+ * @return void
+ */
+function computeTotal($users)
+{
+    $totalMinutes = 0;
+    $totalHour = 0;
+    //we get the group flight
+    foreach ($users as $key => $value) {
+        $flight = FlightDAO::getAllUserFlightByUserId($value['Id_User']);
+
+        
+        foreach ($flight as $key => $value) {
+
+            $totalMinutes += computeTotalTime($value['Dt_Departure'], $value['Dt_Arrival'], $value['Tm_Departure'], $value['Tm_Arrival']);
+        }
+    }
+    $totalHour = floor($totalMinutes / 60);
+
+    $totalMinutes = ($totalMinutes - (60 * $totalHour));
+
+    echo $totalHour . ":" . $totalMinutes;
+}
+
+/**
  * Write the group name
  *
  * @param array[mixed] $groupData
@@ -78,4 +105,23 @@ function showFlight($users)
 function groupName($groupData)
 {
     echo $groupData['Nm_Group'];
+}
+
+/**
+ * Function that compute a flight time on with date and hour. Found logic on stackoverflow and adapted it a bit: https://stackoverflow.com/questions/5463549/subtract-time-in-php
+ *
+ * @param string $Dt_Departure
+ * @param string $Dt_Arrival
+ * @param string $Tm_Departure
+ * @param string $Tm_Arrival
+ * @return void
+ */
+function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+{
+    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
+    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+
+    //If you want it in minutes, you can divide the difference by 60 instead
+    $mins = (int)(($end - $start) / 60);
+    return $mins;
 }

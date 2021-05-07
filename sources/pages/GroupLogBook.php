@@ -38,7 +38,7 @@ require_once("./controllers/groupLogBook_controller.php");
                 <div class="container">
                     <div class="block-heading">
                         <h2 class="text-info">Vols du groupe "<?=groupName($groupDATA)?>"</h2>
-                        <p>Consultez vos vols</p>
+                        <p>Total des heures: <?=computeTotal($groupUser)?></p>
                     </div>
                     <form style="max-width: 100%;">
                         <div class="table-responsive">

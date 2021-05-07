@@ -38,7 +38,7 @@ require_once("./controllers/userLogBook_controller.php");
                 <div class="container">
                     <div class="block-heading">
                         <h2 class="text-info">Vos vols</h2>
-                        <p>Consultez vos vols</p>
+                        <p>Total des heures: <?=computeTotal($userFlight)?></p>
                     </div>
                     <form style="max-width: 100%;">
                         <div class="table-responsive">

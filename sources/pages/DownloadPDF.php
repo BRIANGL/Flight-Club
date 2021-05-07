@@ -41,6 +41,51 @@ if (!isset($_SESSION['userID'])) {
 }
 
 $pilot = userDAO::getUserByID($_SESSION['userID']);
+$flight = FlightDAO::getAllUserFlightByUserIdForExportPDF($_SESSION['userID']);
+
+
+/**
+ * Function that take the time of each flight and put it in a total time
+ *
+ * @param array[mixed] $flight
+ * @return void
+ */
+function computeTotal($flight)
+{
+    $totalMinutes = 0;
+    $totalHour = 0;
+    foreach ($flight as $key => $value) {
+        
+        $totalMinutes += computeTotalTime($value['Dt_Departure'],$value['Dt_Arrival'],$value['Tm_Departure'],$value['Tm_Arrival']);
+    }
+
+    $totalHour = floor($totalMinutes/60);
+
+    $totalMinutes = ($totalMinutes - (60* $totalHour));
+
+    return $totalHour . ":" . $totalMinutes;
+}
+
+
+/**
+ * Function that compute a flight time on with date and hour. Found logic on stackoverflow and adapted it a bit: https://stackoverflow.com/questions/5463549/subtract-time-in-php
+ *
+ * @param string $Dt_Departure
+ * @param string $Dt_Arrival
+ * @param string $Tm_Departure
+ * @param string $Tm_Arrival
+ * @return void
+ */
+function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+{
+    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
+    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+
+    //If you want it in minutes, you can divide the difference by 60 instead
+    $mins = (int)(($end - $start) / 60);
+    return $mins;
+}
+
 
 
 
@@ -91,6 +136,17 @@ class MYPDF extends TCPDF
         }
         $this->Cell(array_sum($w), 0, '', 'T');
     }
+
+    // Page footer
+    public function Footer() {
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 8);
+        // Page number
+        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, date("d-m-Y H:i:s"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
+    }
 }
 
 // create new PDF document
@@ -104,7 +160,7 @@ $pdf->SetSubject('Flight Club logbook');
 $pdf->SetKeywords('Logbook, PDF, carnet de vol, vol, aviation');
 
 // set default header data
-$pdf->SetHeaderData("", 0, 'Carnet de vol de ' . $pilot['Txt_Email'], PDF_HEADER_STRING);
+$pdf->SetHeaderData("", 0, 'Carnet de vol de ' . $pilot['Txt_Email'] . "| Total des heures: " . computeTotal($flight), PDF_HEADER_STRING);
 
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -142,7 +198,7 @@ $pdf->AddPage();
 $header = array('Role', 'Type de vol', 'Date de départ', 'Date d\'arrivée', 'Heure de départ', 'Heure d\'arrivée', 'Allumage moteur', 'Moteur coupé', 'Type d\'aéronef', 'Immatriculation', 'Départ', 'Arrivée', 'Catégorie de vol', 'Mode de vol', 'Passager');
 
 // data loading
-$data = FlightDAO::getAllUserFlightByUserIdForExportPDF($_SESSION['userID']);
+$data = $flight;
 
 // print colored table
 $pdf->ColoredTable($header, $data);
