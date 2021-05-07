@@ -73,6 +73,21 @@ class UserDAO
     }
 
     /**
+     * Get all data from an user with a flight ID
+     *
+     * @param int $flightID
+     * @return array[mixed]
+     */
+    public static function getUserByFlightID($flightID)
+    {
+        $db = DBConnection::getConnection();
+        $sql = "SELECT * FROM `tbl_user-flight` join `tbl_user` on `tbl_user-flight`.`Id_User` = `tbl_user`.`Id_User` WHERE `tbl_user-flight`.`Id_Flight` = :flightId";
+        $request = $db->prepare($sql);
+        $request->execute([':flightId' => $flightID]);
+        return $request->fetch();
+    }
+
+    /**
      * Get all user data from their email
      *
      * @param string $email

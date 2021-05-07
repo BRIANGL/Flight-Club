@@ -3,9 +3,9 @@
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/05)
- * User logbook menu page here
+ * User logbook add flight page here
  */
-require_once("./controllers/userLogBookMenu_controller.php");
+require_once("./controllers/userAddFlight_controller.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,17 +35,42 @@ require_once("./controllers/userLogBookMenu_controller.php");
             <section class="clean-block clean-form dark">
                 <div class="container">
                     <div class="block-heading">
-                        <h2 class="text-info">Carnet de vol</h2>
-                        <p>Gérez votre carnet de vol</p>
+                        <h2 class="text-info">Ajouter un vol</h2>
+                        <p>Ajoutez un vol a votre carnet de vol</p>
                     </div>
-                    <form>
-                        <table class="d-flex justify-content-center">
-                            <tr>
-                                <td><a href="?page=myFlights" class="btn btn-primary">Mes vols</a></td>
-
-                                <td><a href="?page=addFlight" class="btn btn-primary">Ajouter un vol</a></td>
-                            </tr>
-                        </table>
+                    <form method="POST" action="">
+                    <?php if ($message != "") { ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Erreur !</strong> <?= $message ?>
+                            </div>
+                        <?php } ?>
+                        <?php if ($successMessage != "") { ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Succès !</strong> <?= $successMessage ?>
+                            </div>
+                        <?php } ?>
+                        <div class="mb-3"><label class="form-label" for="Cd_Role">Role</label><select class="form-select" name="Cd_Role" id="Cd_Role">
+                        <option value="Pilot Flying">PF (Pilot Flying, Pilote qui pilote)</option>
+                        <option value="Pilot not flying">PNF (Pilot Not Flying, Pilote qui ne pilote pas)</option>
+                        <option value="Passenger">PAX (Passager)</option>
+                        </select></div>
+                        <div class="mb-3"><label class="form-label" for="No_Flight">Vol</label><input class="form-control item" type="text" id="No_Flight" name="No_Flight" required style="text-transform:uppercase" placeholder="VFR, IFR, ..." value="<?=$flight?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Dt_Departure">Date du décollage</label><input class="form-control item" type="date" id="Dt_Departure" name="Dt_Departure" required placeholder="jj-mm-YYYY" value="<?=$dateDeparture?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Dt_Arrival">Date de l'atterissage</label><input class="form-control item" type="date" id="Dt_Arrival" name="Dt_Arrival" required placeholder="jj-mm-YYYY" value="<?=$dateArrival?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Tm_Departure">Heure de départ</label><input class="form-control item" type="time" id="Tm_Departure" name="Tm_Departure" required value="<?=$timeDeparture?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Tm_Arrival">Heure d'arrivée</label><input class="form-control item" type="time" id="Tm_Arrival" name="Tm_Arrival" required value="<?=$timeArrival?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Tm_Engine_On">Heure de démmarage moteur</label><input class="form-control item" type="time" id="Tm_Engine_On" name="Tm_Engine_On" value="<?=$timeEngineOn?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Tm_Engine_Off">Heure d'arret moteur</label><input class="form-control item" type="time" id="Tm_Engine_Off" name="Tm_Engine_Off" value="<?=$timeEngineOff?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Nm_Plane">Type d'aéronef</label><input class="form-control item" type="text" id="Nm_Plane" name="Nm_Plane" required placeholder="Ex: Tecnam P2002" maxlength="45" value="<?=$typeAircraft?>"></div>
+                        <div class="mb-3"><label class="form-label" for="No_Plane">Immatriculation</label><input class="form-control item" type="text" id="No_Plane" name="No_Plane" required placeholder="Ex: F-XXXX" style="text-transform:uppercase" maxlength="45" value="<?=$registrationPlane?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Cd_ICAO_Departure">ICAO de départ</label><input class="form-control item" type="text" id="Cd_ICAO_Departure" name="Cd_ICAO_Departure" style="text-transform:uppercase" required placeholder="Ex: LFHN" minlength="4" maxlength="4" value="<?=$icaoDeparture?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Cd_ICAO_Arrival">ICAO d'arrivée</label><input class="form-control item" type="text" id="Cd_ICAO_Arrival" name="Cd_ICAO_Arrival" style="text-transform:uppercase" required placeholder="Ex: LSMP" minlength="4" maxlength="4" value="<?=$icaoArrival?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Cd_Flight_Type">Type de vol</label><input class="form-control item" type="text" id="Cd_Flight_Type" name="Cd_Flight_Type" required placeholder="Ex: Navigation" maxlength="45" value="<?=$flightType?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Cd_Flight_Mode">Mode de vol</label><input class="form-control item" type="text" id="Cd_Flight_Mode" name="Cd_Flight_Mode" required placeholder="Ex: Solo" maxlength="45" value="<?=$flightMode?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Txt_Meteo">Météo</label><textarea class="form-control" id="Txt_Meteo" rows="3" name="Txt_Meteo" required placeholder="Ex: LSMP 060520Z AUTO VRB01KT 9999NDV BKN087 07/02 Q1012 RMK" maxlength="512"><?=$weather?></textarea></div>
+                        <div class="mb-3"><label class="form-label" for="Nb_Passengers">Nombre de passagers</label><input class="form-control item" type="number" id="Nb_Passengers" name="Nb_Passengers" required min="0" max="99999999999" value="<?=$passengers?>"></div>
+                        <div class="mb-3"><label class="form-label" for="Txt_Note">Notes</label><textarea class="form-control" id="Txt_Note" rows="3" name="Txt_Note" maxlength="1024"><?=$notes?></textarea></div>
+                        <button class="btn btn-primary" type="submit">Enregistrer le vol</button>
                     </form>
                 </div>
             </section><!-- End: User Log Book Form -->

@@ -46,7 +46,8 @@ require_once("./controllers/userLogBook_controller.php");
                                 <thead>
                                     <tr>
                                         <th>Vol</th>
-                                        <th>Date du vol</th>
+                                        <th>Date du décollage</th>
+                                        <th>Date de l'atterrissage</th>
                                         <th>Heure de départ</th>
                                         <th>Heure d'arrivée</th>
                                         <th>Heure de démmarage moteur</th>
@@ -58,8 +59,8 @@ require_once("./controllers/userLogBook_controller.php");
                                         <th>Type de vol</th>
                                         <th>Mode de vol</th>
                                         <th>Role</th>
-                                        <th>Détail</th>
-                                        <th>Modifier</th>
+                                        <th>Détails</th>
+                                        <th>Éditer</th>
                                     </tr>
                                 </thead>
                                 <tbody>

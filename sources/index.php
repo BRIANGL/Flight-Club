@@ -82,6 +82,12 @@ if (isset($page)) {
         case 'GroupLogBook':
             require("./pages/GroupLogBook.php");
             break;
+        case 'logbookDetail':
+            require("./pages/FlightDetail.php");
+            break;
+        case 'logbookEdit':
+            require("./pages/FlightEdit.php");
+            break;
         case '404':
             require("./pages/404.php");
             break;
