@@ -102,14 +102,12 @@ require_once("./controllers/flightEdit_controller.php");
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div class="mb-3"><input class="form-control item" type="date" id="Dt_Departure" name="Dt_Departure" value="<?= $userFlight['Dt_Departure'] ?>" required></div>
-                                            <div class="mb-3"><input class="form-control item" type="time" id="Tm_Departure" name="Tm_Departure" value="<?= $userFlight['Tm_Departure'] ?>" required></div>
+                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Departure" name="Dttm_Departure" value="<?= $userFlight['Dttm_Departure'] ?>" required></div>
                                         </td>
                                         <td>
-                                            <div class="mb-3"><input class="form-control item" type="date" id="Dt_Arrival" name="Dt_Arrival" value="<?= $userFlight['Dt_Arrival'] ?>" required></div>
-                                            <div class="mb-3"><input class="form-control item" type="time" id="Tm_Arrival" name="Tm_Arrival" value="<?= $userFlight['Tm_Arrival'] ?>" required></div>
+                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Arrival" name="Dttm_Arrival" value="<?= $userFlight['Dttm_Arrival'] ?>" required></div>
                                         </td>
-                                        <td><?= computeTotalTime($userFlight['Dt_Departure'], $userFlight['Dt_Arrival'], $userFlight['Tm_Departure'], $userFlight['Tm_Arrival']) ?></td>
+                                        <td><?= computeTotalTime($userFlight['Dttm_Departure'], $userFlight['Dttm_Arrival']) ?></td>
                                     </tr>
                                 </tbody>
                                 <thead>
@@ -127,7 +125,7 @@ require_once("./controllers/flightEdit_controller.php");
                                         <td>
                                             <div class="mb-3"><input class="form-control item" type="time" id="Tm_Engine_Off" name="Tm_Engine_Off" value="<?= $userFlight['Tm_Engine_Off'] ?>"></div>
                                         </td>
-                                        <td><?= computeTotalTime($userFlight['Dt_Departure'], $userFlight['Dt_Arrival'], $userFlight['Tm_Engine_On'], $userFlight['Tm_Engine_Off']) ?></td>
+                                        <td><?= computeTotalTime($userFlight['Dttm_Departure'], $userFlight['Dttm_Arrival'], $userFlight['Tm_Engine_On'], $userFlight['Tm_Engine_Off']) ?></td>
                                     </tr>
                                 </tbody>
                             </table>

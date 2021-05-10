@@ -83,23 +83,21 @@ require_once("./controllers/flightDetail_controller.php");
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><?=$userFlight['Dt_Departure']?> <?=$userFlight['Tm_Departure']?></td>
-                                        <td><?=$userFlight['Dt_Arrival']?> <?=$userFlight['Tm_Arrival']?></td>
-                                        <td><?=computeTotalTime($userFlight['Dt_Departure'],$userFlight['Dt_Arrival'],$userFlight['Tm_Departure'],$userFlight['Tm_Arrival'])?></td>
+                                        <td><?=$userFlight['Dttm_Departure']?></td>
+                                        <td><?=$userFlight['Dttm_Arrival']?></td>
+                                        <td><?=computeTotalTime($userFlight['Dttm_Departure'],$userFlight['Dttm_Arrival'])?></td>
                                     </tr>
                                 </tbody>
                                 <thead>
                                     <tr>
                                         <th>Moteur allumé</th>
                                         <th>Moteur eteint</th>
-                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><?=$userFlight['Tm_Engine_On']?></td>
                                         <td><?=$userFlight['Tm_Engine_Off']?></td>
-                                        <td><?=computeTotalTime($userFlight['Dt_Departure'],$userFlight['Dt_Arrival'],$userFlight['Tm_Engine_On'],$userFlight['Tm_Engine_Off'])?></td>
                                     </tr>
                                 </tbody>
                             </table>

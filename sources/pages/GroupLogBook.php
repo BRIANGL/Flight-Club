@@ -48,8 +48,6 @@ require_once("./controllers/groupLogBook_controller.php");
                                         <th>Vol</th>
                                         <th>Date du décollage</th>
                                         <th>Date de l'atterrissage</th>
-                                        <th>Heure de départ</th>
-                                        <th>Heure d'arrivée</th>
                                         <th>Heure de démmarage moteur</th>
                                         <th>Heure de moteur coupé</th>
                                         <th>Modèle d'avion</th>

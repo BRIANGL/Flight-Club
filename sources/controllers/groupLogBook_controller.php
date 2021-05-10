@@ -57,7 +57,7 @@ function showFlight($users)
         //for each flight of the group we write it in a table
         foreach ($flight as $key => $value) {
             $compteur++;
-            echo "<tr><td>" . $value['No_Flight'] . "</td><td>" . $value['Dt_Departure'] . "</td><td>" . $value['Dt_Arrival'] . "</td><td>" . $value['Tm_Departure'] . "</td><td>" . $value['Tm_Arrival'] . "</td><td>" .
+            echo "<tr><td>" . $value['No_Flight'] . "</td><td>" . $value['Dttm_Departure'] . "</td><td>" . $value['Dttm_Arrival'] . "</td><td>" .
                 $value['Tm_Engine_On'] . "</td><td>" . $value['Tm_Engine_Off'] . "</td><td>" . $value['Nm_Plane'] . "</td><td>" . $value['No_Plane'] . "</td><td>" .
                 $value['Cd_ICAO_Departure'] . "</td><td>" . $value['Cd_ICAO_Arrival'] . "</td><td>" . $value['Cd_Flight_Type'] . "</td><td>" . $value['Cd_Flight_Mode'] .
                 "</td><td>" . $value['Cd_Role'] . "</td><td><a href='?page=logbookDetail&id=" . $value['Id_Flight'] . "'>Détails</a></td></tr>";
@@ -65,7 +65,7 @@ function showFlight($users)
     }
     //if there is no flight, we simply fill all cell with a "/"
     if ($compteur == 0) {
-        echo "<tr><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td></tr>";
+        echo "<tr><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td><td>/</td></tr>";
     }
 }
 
@@ -86,7 +86,7 @@ function computeTotal($users)
         
         foreach ($flight as $key => $value) {
 
-            $totalMinutes += computeTotalTime($value['Dt_Departure'], $value['Dt_Arrival'], $value['Tm_Departure'], $value['Tm_Arrival']);
+            $totalMinutes += computeTotalTime($value['Dttm_Departure'], $value['Dttm_Arrival']);
         }
     }
     $totalHour = floor($totalMinutes / 60);
@@ -112,14 +112,12 @@ function groupName($groupData)
  *
  * @param string $Dt_Departure
  * @param string $Dt_Arrival
- * @param string $Tm_Departure
- * @param string $Tm_Arrival
  * @return void
  */
-function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {
-    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
-    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+    $start = strtotime($Dt_Departure);
+    $end = strtotime($Dt_Arrival);
 
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);

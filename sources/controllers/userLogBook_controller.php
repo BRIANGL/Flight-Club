@@ -31,7 +31,7 @@ function showFlight($flight)
     //if there is at least 1 flight, we show it
     if (!empty($flight)) {
         foreach ($flight as $key => $value) {
-            echo "<tr><td>" . $value['No_Flight'] . "</td><td>" . $value['Dt_Departure'] . "</td><td>" . $value['Dt_Arrival'] . "</td><td>" . $value['Tm_Departure'] . "</td><td>" . $value['Tm_Arrival'] . "</td><td>" .
+            echo "<tr><td>" . $value['No_Flight'] . "</td><td>" . $value['Dttm_Departure'] . "</td><td>" . $value['Dttm_Arrival'] . "</td><td>" .
                 $value['Tm_Engine_On'] . "</td><td>" . $value['Tm_Engine_Off'] . "</td><td>" . $value['Nm_Plane'] . "</td><td>" . $value['No_Plane'] . "</td><td>" .
                 $value['Cd_ICAO_Departure'] . "</td><td>" . $value['Cd_ICAO_Arrival'] . "</td><td>" . $value['Cd_Flight_Type'] . "</td><td>" . $value['Cd_Flight_Mode'] .
                 "</td><td>" . $value['Cd_Role'] . "</td><td><a href='?page=logbookDetail&id=" . $value['Id_Flight'] . "'>Détails</a></td><td><a href='?page=logbookEdit&id=" . $value['Id_Flight'] . "'>Editer le vol</a></td></tr>";
@@ -53,15 +53,19 @@ function computeTotal($flight)
     $totalMinutes = 0;
     $totalHour = 0;
     foreach ($flight as $key => $value) {
-        
-        $totalMinutes += computeTotalTime($value['Dt_Departure'],$value['Dt_Arrival'],$value['Tm_Departure'],$value['Tm_Arrival']);
+
+        $totalMinutes += computeTotalTime($value['Dttm_Departure'], $value['Dttm_Arrival']);
     }
 
-    $totalHour = floor($totalMinutes/60);
+    $totalHour = floor($totalMinutes / 60);
 
-    $totalMinutes = ($totalMinutes - (60* $totalHour));
+    $totalMinutes = ($totalMinutes - (60 * $totalHour));
 
-    echo $totalHour . ":" . $totalMinutes;
+
+    $hour_padded = sprintf("%02d", $totalHour);
+    $minutes_padded = sprintf("%02d", $totalMinutes);
+
+    echo $hour_padded . ":" . $minutes_padded;
 }
 
 
@@ -70,14 +74,12 @@ function computeTotal($flight)
  *
  * @param string $Dt_Departure
  * @param string $Dt_Arrival
- * @param string $Tm_Departure
- * @param string $Tm_Arrival
  * @return void
  */
-function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {
-    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
-    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+    $start = strtotime($Dt_Departure);
+    $end = strtotime($Dt_Arrival);
 
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);

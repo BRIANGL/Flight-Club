@@ -23,10 +23,8 @@ if (!isset($_SESSION['userID'])) {
 //we filter the user input
 $role = filter_input(INPUT_POST, "Cd_Role", FILTER_SANITIZE_STRING);
 $flight = filter_input(INPUT_POST, "No_Flight", FILTER_SANITIZE_STRING);
-$dateDeparture = filter_input(INPUT_POST, "Dt_Departure", FILTER_SANITIZE_STRING);
-$dateArrival = filter_input(INPUT_POST, "Dt_Arrival", FILTER_SANITIZE_STRING);
-$timeDeparture = filter_input(INPUT_POST, "Tm_Departure", FILTER_SANITIZE_STRING);
-$timeArrival = filter_input(INPUT_POST, "Tm_Arrival", FILTER_SANITIZE_STRING);
+$dateDeparture = filter_input(INPUT_POST, "Dttm_Departure", FILTER_SANITIZE_STRING);
+$dateArrival = filter_input(INPUT_POST, "Dttm_Arrival", FILTER_SANITIZE_STRING);
 $timeEngineOn = filter_input(INPUT_POST, "Tm_Engine_On", FILTER_SANITIZE_STRING);
 $timeEngineOff = filter_input(INPUT_POST, "Tm_Engine_Off", FILTER_SANITIZE_STRING);
 $typeAircraft = filter_input(INPUT_POST, "Nm_Plane", FILTER_SANITIZE_STRING);
@@ -57,22 +55,33 @@ function checkTime($time)
     }
 }
 
+/**
+ * function that validate the date
+ *
+ * @param datetime $date
+ * @return bool
+ */
+function validateDate($date)
+{
+    $newDate = explode("T",$date);
+    return checkdate(explode("-", $newDate[0])[1], explode("-", $newDate[0])[2], explode("-", $newDate[0])[0]);
+}
 
 //we reset the message
 $message = "";
 $successMessage = "";
 //if all data are not empty
 if (
-    !empty($role) && !empty($flight) && !empty($dateDeparture) && !empty($dateArrival) && !empty($timeDeparture) && !empty($timeArrival) &&
+    !empty($role) && !empty($flight) && !empty($dateDeparture) && !empty($dateArrival) &&
     !empty($typeAircraft) && !empty($registrationPlane) && !empty($icaoDeparture) && !empty($icaoArrival) && !empty($flightType)
     && !empty($flightMode) && !empty($weather) && $passengers != ""
 ) {
     //we check that the data is valid
     if (strlen($icaoDeparture) == 4 && strlen($icaoArrival) == 4) {
         //check that dates are valid
-        if (checkdate(explode("-", $dateDeparture)[1], explode("-", $dateDeparture)[2], explode("-", $dateDeparture)[0]) && $dateDeparture <= date("Y-m-d") && checkdate(explode("-", $dateArrival)[1], explode("-", $dateArrival)[2], explode("-", $dateArrival)[0]) && $dateArrival <= date("Y-m-d") && $dateDeparture <= $dateArrival) {
+        if (validateDate($dateDeparture) && validateDate($dateArrival)) {
             //check the validity of the hours of the take off time and landing time
-            if (checkTime($timeDeparture) && checkTime($timeArrival)) {
+            if (checkTime(explode("T", $dateDeparture)[1]) && checkTime(explode("T", $dateArrival)[1])) {
                 $validTime = true;
                 //check the validity of the hours for the engine off and engine on time
                 if (!empty($timeEngineOn) && !empty($timeEngineOff)) {
@@ -111,6 +120,15 @@ if (
                                                     $idFlight = 0;
                                                 }
                                                 try {
+
+                                                    //converting departure datetime to a good datetime
+                                                    $dateDeparture = explode("T", $dateDeparture);
+                                                    $dateDeparture = $dateDeparture[0] . " " . $dateDeparture[1];
+
+                                                    //converting arrival datetime to a good datetime
+                                                    $dateArrival = explode("T", $dateArrival);
+                                                    $dateArrival = $dateArrival[0] . " " . $dateArrival[1];
+
                                                     FlightDAO::addFlight(
                                                         $idFlight,
                                                         $_SESSION['userID'],
@@ -118,8 +136,6 @@ if (
                                                         strtoupper($flight),
                                                         $dateDeparture,
                                                         $dateArrival,
-                                                        $timeDeparture,
-                                                        $timeArrival,
                                                         $timeEngineOn,
                                                         $timeEngineOff,
                                                         $typeAircraft,

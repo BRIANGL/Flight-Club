@@ -27,10 +27,8 @@ require_once('./controllers/tcpdf_include.php');
 
 require_once "./sql/userDAO.php";
 require_once "./sql/flightDAO.php";
-require_once "./sql/groupDAO.php";
 
 use FlightClub\sql\FlightDAO;
-use FlightClub\sql\GroupDAO;
 use FlightClub\sql\userDAO;
 
 
@@ -41,7 +39,7 @@ if (!isset($_SESSION['userID'])) {
 }
 
 $pilot = userDAO::getUserByID($_SESSION['userID']);
-$flight = FlightDAO::getAllUserFlightByUserIdForExportPDF($_SESSION['userID']);
+$flight = FlightDAO::getAllUserFlightByUserIdForExport($_SESSION['userID']);
 
 
 /**
@@ -56,7 +54,7 @@ function computeTotal($flight)
     $totalHour = 0;
     foreach ($flight as $key => $value) {
         
-        $totalMinutes += computeTotalTime($value['Dt_Departure'],$value['Dt_Arrival'],$value['Tm_Departure'],$value['Tm_Arrival']);
+        $totalMinutes += computeTotalTime($value['Dttm_Departure'],$value['Dttm_Arrival']);
     }
 
     $totalHour = floor($totalMinutes/60);
@@ -72,14 +70,12 @@ function computeTotal($flight)
  *
  * @param string $Dt_Departure
  * @param string $Dt_Arrival
- * @param string $Tm_Departure
- * @param string $Tm_Arrival
  * @return void
  */
-function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {
-    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
-    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+    $start = strtotime($Dt_Departure);
+    $end = strtotime($Dt_Arrival);
 
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);
@@ -103,7 +99,7 @@ class MYPDF extends TCPDF
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(20, 20, 25, 25, 25, 25, 30, 25, 45, 30, 20, 20, 30,30, 20);
+        $w = array(20, 20, 35, 35, 25, 25, 45, 25, 20, 20, 30, 30, 20);
         $num_headers = count($header);
         for ($i = 0; $i < $num_headers; ++$i) {
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
@@ -129,8 +125,6 @@ class MYPDF extends TCPDF
             $this->Cell($w[10], 6, $row[10], 'LR', 0, 'C', $fill);
             $this->Cell($w[11], 6, $row[11], 'LR', 0, 'C', $fill);
             $this->Cell($w[12], 6, $row[12], 'LR', 0, 'C', $fill);
-            $this->Cell($w[13], 6, $row[13], 'LR', 0, 'C', $fill);
-            $this->Cell($w[14], 6, $row[14], 'LR', 0, 'C', $fill);
             $this->Ln();
             $fill = !$fill;
         }
@@ -195,7 +189,7 @@ $pdf->SetFont('helvetica', '', 8);
 $pdf->AddPage();
 
 // column titles
-$header = array('Role', 'Type de vol', 'Date de départ', 'Date d\'arrivée', 'Heure de départ', 'Heure d\'arrivée', 'Allumage moteur', 'Moteur coupé', 'Type d\'aéronef', 'Immatriculation', 'Départ', 'Arrivée', 'Catégorie de vol', 'Mode de vol', 'Passager');
+$header = array('Role', 'Type de vol', 'Départ', 'Arrivée', 'Allumage moteur', 'Moteur coupé', 'Type d\'aéronef', 'Immatriculation', 'Départ', 'Arrivée', 'Catégorie de vol', 'Mode de vol', 'Passager');
 
 // data loading
 $data = $flight;

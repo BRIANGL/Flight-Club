@@ -41,10 +41,10 @@ class FlightDAO
      * @param int $idUser
      * @return array[mixed]
      */
-    public static function getAllUserFlightByUserIdForExportPDF($idUser)
+    public static function getAllUserFlightByUserIdForExport($idUser)
     {
         $db = DBConnection::getConnection();
-        $sql = "SELECT `Cd_Role`, `No_Flight`, `Dt_Departure`, `Dt_Arrival`, `Tm_Departure`, `Tm_Arrival`, `Tm_Engine_On`, `Tm_Engine_Off`, `Nm_Plane`, `No_Plane`, `Cd_ICAO_Departure`, `Cd_ICAO_Arrival`, `Cd_Flight_Type`, `Cd_Flight_Mode`, `Nb_Passengers` FROM `tbl_flight` join `tbl_user-flight` on `tbl_flight`.`Id_Flight` = `tbl_user-flight`.`Id_Flight` WHERE `Id_User` = :idUser";
+        $sql = "SELECT `Cd_Role`, `No_Flight`, `Dttm_Departure`, `Dttm_Arrival`, `Tm_Engine_On`, `Tm_Engine_Off`, `Nm_Plane`, `No_Plane`, `Cd_ICAO_Departure`, `Cd_ICAO_Arrival`, `Cd_Flight_Type`, `Cd_Flight_Mode`, `Nb_Passengers` FROM `tbl_flight` join `tbl_user-flight` on `tbl_flight`.`Id_Flight` = `tbl_user-flight`.`Id_Flight` WHERE `Id_User` = :idUser";
         $request = $db->prepare($sql);
         $request->execute([
             ':idUser' => $idUser
@@ -83,8 +83,6 @@ class FlightDAO
         $flight,
         $dateDeparture,
         $dateArrival,
-        $timeDeparture,
-        $timeArrival,
         $timeEngineOn,
         $timeEngineOff,
         $typeAircraft,
@@ -99,10 +97,10 @@ class FlightDAO
     ) {
 
         $db = DBConnection::getConnection();
-        $sql = "INSERT INTO `tbl_flight`(`Id_Flight`, `No_Flight`,`Dt_Departure`,`Dt_Arrival`,`Tm_Departure`,
-        `Tm_Arrival`,`Tm_Engine_On`,`Tm_Engine_Off`,`Nm_Plane`,`No_Plane`,`Cd_ICAO_Departure`,
+        $sql = "INSERT INTO `tbl_flight`(`Id_Flight`, `No_Flight`,`Dttm_Departure`,`Dttm_Arrival`,
+        `Tm_Engine_On`,`Tm_Engine_Off`,`Nm_Plane`,`No_Plane`,`Cd_ICAO_Departure`,
         `Cd_ICAO_Arrival`,`Cd_Flight_Type`,`Cd_Flight_Mode`,`Txt_Meteo`,`Nb_Passengers`,`Txt_Note`)
-    VALUES (:idFlight, :flight, :dateDeparture, :dateArrival, :timeDeparture, :timeArrival, :timeEngineOn,
+    VALUES (:idFlight, :flight, :dateDeparture, :dateArrival, :timeEngineOn,
             :timeEngineOff, :typeAircraft, :registrationPlane, :icaoDeparture, :icaoArrival, :flightType, :flightMode, :weather, :passengers, :notes);
             INSERT INTO `tbl_user-flight`(`Id_User`, `Id_Flight`, `Cd_Role`)
     VALUES (:idUser, :idFlight, :role)";
@@ -114,8 +112,6 @@ class FlightDAO
             ':flight' => $flight,
             ':dateDeparture' => $dateDeparture,
             ':dateArrival' => $dateArrival,
-            ':timeDeparture' => $timeDeparture,
-            ':timeArrival' => $timeArrival,
             ':timeEngineOn' => $timeEngineOn,
             ':timeEngineOff' => $timeEngineOff,
             ':typeAircraft' => $typeAircraft,
@@ -140,8 +136,6 @@ class FlightDAO
      * @param string $flight
      * @param string $dateDeparture
      * @param string $dateArrival
-     * @param string $timeDeparture
-     * @param string $timeArrival
      * @param string $timeEngineOn
      * @param string $timeEngineOff
      * @param string $typeAircraft
@@ -162,8 +156,6 @@ class FlightDAO
         $flight,
         $dateDeparture,
         $dateArrival,
-        $timeDeparture,
-        $timeArrival,
         $timeEngineOn,
         $timeEngineOff,
         $typeAircraft,
@@ -178,8 +170,8 @@ class FlightDAO
     ) {
 
         $db = DBConnection::getConnection();
-        $sql = "UPDATE `tbl_flight` SET `No_Flight` = :flight,`Dt_Departure` = :dateDeparture, `Dt_Arrival` = :dateArrival,`Tm_Departure` = :timeDeparture,
-        `Tm_Arrival` = :timeArrival,`Tm_Engine_On` = :timeEngineOn,`Tm_Engine_Off` = :timeEngineOff,`Nm_Plane` = :typeAircraft,`No_Plane` = :registrationPlane, `Cd_ICAO_Departure` = :icaoDeparture,
+        $sql = "UPDATE `tbl_flight` SET `No_Flight` = :flight,`Dttm_Departure` = :dateDeparture, `Dttm_Arrival` = :dateArrival,
+        `Tm_Engine_On` = :timeEngineOn,`Tm_Engine_Off` = :timeEngineOff,`Nm_Plane` = :typeAircraft,`No_Plane` = :registrationPlane, `Cd_ICAO_Departure` = :icaoDeparture,
         `Cd_ICAO_Arrival` = :icaoArrival,`Cd_Flight_Type` = :flightType,`Cd_Flight_Mode` = :flightMode,`Txt_Meteo` = :weather,`Nb_Passengers` = :passengers,`Txt_Note` = :notes WHERE `tbl_flight`.`Id_Flight` = :idFlight;
         UPDATE `tbl_user-flight`SET `Cd_Role` = :role WHERE `Id_Flight` = :idFlight)";
         $request = $db->prepare($sql);
@@ -190,8 +182,6 @@ class FlightDAO
             ':flight' => $flight,
             ':dateDeparture' => $dateDeparture,
             ':dateArrival' => $dateArrival,
-            ':timeDeparture' => $timeDeparture,
-            ':timeArrival' => $timeArrival,
             ':timeEngineOn' => $timeEngineOn,
             ':timeEngineOff' => $timeEngineOff,
             ':typeAircraft' => $typeAircraft,

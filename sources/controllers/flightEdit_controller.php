@@ -23,10 +23,8 @@ $flightId = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 //we filter the user input
 $role = filter_input(INPUT_POST, "Cd_Role", FILTER_SANITIZE_STRING);
 $flight = filter_input(INPUT_POST, "No_Flight", FILTER_SANITIZE_STRING);
-$dateDeparture = filter_input(INPUT_POST, "Dt_Departure", FILTER_SANITIZE_STRING);
-$dateArrival = filter_input(INPUT_POST, "Dt_Arrival", FILTER_SANITIZE_STRING);
-$timeDeparture = filter_input(INPUT_POST, "Tm_Departure", FILTER_SANITIZE_STRING);
-$timeArrival = filter_input(INPUT_POST, "Tm_Arrival", FILTER_SANITIZE_STRING);
+$dateDeparture = filter_input(INPUT_POST, "Dttm_Departure", FILTER_SANITIZE_STRING);
+$dateArrival = filter_input(INPUT_POST, "Dttm_Arrival", FILTER_SANITIZE_STRING);
 $timeEngineOn = filter_input(INPUT_POST, "Tm_Engine_On", FILTER_SANITIZE_STRING);
 $timeEngineOff = filter_input(INPUT_POST, "Tm_Engine_Off", FILTER_SANITIZE_STRING);
 $typeAircraft = filter_input(INPUT_POST, "Nm_Plane", FILTER_SANITIZE_STRING);
@@ -63,6 +61,18 @@ function checkTime($time)
     }
 }
 
+/**
+ * function that validate the date
+ *
+ * @param datetime $date
+ * @return bool
+ */
+function validateDate($date)
+{
+    $newDate = explode("T", $date);
+    return checkdate(explode("-", $newDate[0])[1], explode("-", $newDate[0])[2], explode("-", $newDate[0])[0]);
+}
+
 //redirect the user if the id is wrong
 if (empty($flightId)) {
     header("Location: ./index.php?page=404");
@@ -95,20 +105,20 @@ $message = "";
 $successMessage = "";
 //if all data are not empty
 if (
-    !empty($role) && !empty($flight) && !empty($dateDeparture) && !empty($dateArrival) && !empty($timeDeparture) && !empty($timeArrival) &&
+    !empty($role) && !empty($flight) && !empty($dateDeparture) && !empty($dateArrival) &&
     !empty($typeAircraft) && !empty($registrationPlane) && !empty($icaoDeparture) && !empty($icaoArrival) && !empty($flightType)
     && !empty($flightMode) && !empty($weather) && $passengers != ""
 ) {
     //we check that the data is valid
     if (strlen($icaoDeparture) == 4 && strlen($icaoArrival) == 4) {
         //check that dates are valid
-        if (checkdate(explode("-", $dateDeparture)[1], explode("-", $dateDeparture)[2], explode("-", $dateDeparture)[0]) && $dateDeparture <= date("Y-m-d") && checkdate(explode("-", $dateArrival)[1], explode("-", $dateArrival)[2], explode("-", $dateArrival)[0]) && $dateArrival <= date("Y-m-d") && $dateDeparture <= $dateArrival) {
+        if (validateDate($dateDeparture) && validateDate($dateArrival)) {
             //check the validity of the hours of the take off time and landing time
-            if (checkTime(explode(":",$timeDeparture)[0] . ":" . explode(":",$timeDeparture)[1]) && checkTime(explode(":",$timeArrival)[0] . ":" . explode(":",$timeArrival)[1])) {
+            if (checkTime(explode("T", $dateDeparture)[1]) && checkTime(explode("T", $dateArrival)[1])) {
                 $validTime = true;
                 //check the validity of the hours for the engine off and engine on time
                 if (!empty($timeEngineOn) && !empty($timeEngineOff)) {
-                    if (checkTime(explode(":",$timeEngineOn)[0] . ":" . explode(":",$timeEngineOn)[1]) && checkTime(explode(":",$timeEngineOff)[0] . ":" . explode(":",$timeEngineOff)[1])) {
+                    if (checkTime(explode(":", $timeEngineOn)[0] . ":" . explode(":", $timeEngineOn)[1]) && checkTime(explode(":", $timeEngineOff)[0] . ":" . explode(":", $timeEngineOff)[1])) {
                         $validTime = true;
                     } else {
                         $validTime = false;
@@ -136,7 +146,16 @@ if (
 
                                                 //we check with is the latest id in the database
                                                 $allflight = FlightDAO::getAllFlightOrderById();
-                                                try {                                                
+                                                try {
+
+                                                    //converting departure datetime to a good datetime
+                                                    $dateDeparture = explode("T", $dateDeparture);
+                                                    $dateDeparture = $dateDeparture[0] . " " . $dateDeparture[1];
+
+                                                    //converting arrival datetime to a good datetime
+                                                    $dateArrival = explode("T", $dateArrival);
+                                                    $dateArrival = $dateArrival[0] . " " . $dateArrival[1];
+
                                                     FlightDAO::editFlight(
                                                         $flightId,
                                                         $_SESSION['userID'],
@@ -144,8 +163,6 @@ if (
                                                         strtoupper($flight),
                                                         $dateDeparture,
                                                         $dateArrival,
-                                                        $timeDeparture,
-                                                        $timeArrival,
                                                         $timeEngineOn,
                                                         $timeEngineOff,
                                                         $typeAircraft,
@@ -159,10 +176,12 @@ if (
                                                         $notes
                                                     );
                                                     $successMessage = "Vol enregistrer avec succès!";
+
+                                                    //we get the new data to show to the user
+                                                    $userFlight = FlightDAO::getFlightById($flightId);
                                                 } catch (\Throwable $th) {
                                                     $message = "Une erreure est survenue. merci de réessayer";
                                                 }
-                                                
                                             } else {
                                                 $message = "Les notes sonts trop longues";
                                             }
@@ -198,6 +217,7 @@ if (
     }
 }
 
+
 //we get the new data of the pilot of this flight
 $pilotOfThisFlight = userDAO::getUserByFlightID($flightId);
 
@@ -206,14 +226,12 @@ $pilotOfThisFlight = userDAO::getUserByFlightID($flightId);
  *
  * @param string $Dt_Departure
  * @param string $Dt_Arrival
- * @param string $Tm_Departure
- * @param string $Tm_Arrival
  * @return void
  */
-function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {
-    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
-    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+    $start = strtotime($Dt_Departure);
+    $end = strtotime($Dt_Arrival);
 
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);

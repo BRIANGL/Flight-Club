@@ -59,16 +59,14 @@ $userFlight = FlightDAO::getFlightById($flightId);
 /**
  * Function that compute a flight time on with date and hour. Found logic on stackoverflow and adapted it a bit: https://stackoverflow.com/questions/5463549/subtract-time-in-php
  *
- * @param string $Dt_Departure
- * @param string $Dt_Arrival
- * @param string $Tm_Departure
- * @param string $Tm_Arrival
+ * @param string $Dttm_Departure
+ * @param string $Dttm_Arrival
  * @return void
  */
-function computeTotalTime($Dt_Departure, $Dt_Arrival, $Tm_Departure, $Tm_Arrival)
+function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {
-    $start = strtotime($Dt_Departure . " " . $Tm_Departure);
-    $end = strtotime($Dt_Arrival . " " . $Tm_Arrival);
+    $start = strtotime($Dt_Departure);
+    $end = strtotime($Dt_Arrival);
 
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);
