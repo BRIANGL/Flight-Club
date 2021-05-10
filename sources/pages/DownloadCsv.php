@@ -120,7 +120,7 @@ while (false !== ($row = $query->fetch(PDO::FETCH_ASSOC))) {
     array_walk($row, __NAMESPACE__ . '\cleanData');
     fputcsv($out, array_values($row), ';', '"');
 }
-fputcsv($out, array("Carnet de vol de " . UserDAO::getUserByID($_SESSION['userID'])['Txt_Email'], "Temps de vol total : ", computeTotal($userFlight)), ';', '"');
+fputcsv($out, array("Carnet de vol de " . UserDAO::getUserByID($_SESSION['userID'])['Txt_Email'], "Temps de vol total : ", computeTotal($userFlight), date("d-m-Y H:i:s")), ';', '"');
 
 fclose($out);
 exit;

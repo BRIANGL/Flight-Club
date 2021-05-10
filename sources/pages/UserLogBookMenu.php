@@ -46,6 +46,8 @@ require_once("./controllers/userLogBookMenu_controller.php");
                                 <td><a href="?page=myFlights" class="btn btn-primary">Mes vols</a></td>
 
                                 <td><a href="?page=addFlight" class="btn btn-primary">Ajouter un vol</a></td>
+                                <td><a href="?page=downloadPdf" class="btn btn-danger">Télécharger en PDF</a></td>
+                                <td><a href="?page=downloadCsv" class="btn btn-success">Télécharger en CSV</a></td>
                             </tr>
                         </table>
                     </form>
