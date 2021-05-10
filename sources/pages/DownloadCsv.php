@@ -43,12 +43,13 @@ function cleanData($str)
     if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
   }
 
-/**
- * Function that take the time of each flight and put it in a total time
- *
- * @param array[mixed] $flight
- * @return void
- */
+
+ /**
+  * Function that take the time of each flight and put it in a total time
+  *
+  * @param array $flight
+  * @return string
+  */
 function computeTotal($flight)
 {
     $totalMinutes = 0;
@@ -75,7 +76,7 @@ function computeTotal($flight)
  *
  * @param string $Dt_Departure
  * @param string $Dt_Arrival
- * @return void
+ * @return string
  */
 function computeTotalTime($Dt_Departure, $Dt_Arrival)
 {

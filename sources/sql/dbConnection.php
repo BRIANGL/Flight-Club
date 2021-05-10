@@ -51,5 +51,30 @@ class DBConnection {
         }
         return self::$conn;
     }
+
+    //TRANSACTION
+    public static function startTransaction()
+    {
+        DBConnection::getConnection()->beginTransaction();
+    }
+
+    public static function rollback()
+    {
+        try {
+            DBConnection::getConnection()->rollback();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+    public static function commit()
+    {
+        try {
+            DBConnection::getConnection()->commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
+    }
   }
  ?>

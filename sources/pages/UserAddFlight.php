@@ -38,7 +38,7 @@ require_once("./controllers/userAddFlight_controller.php");
                         <h2 class="text-info">Ajouter un vol</h2>
                         <p>Ajoutez un vol a votre carnet de vol</p>
                     </div>
-                    <form method="POST" action="">
+                    <form method="POST" action="" enctype="multipart/form-data">
                     <?php if ($message != "") { ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Erreur !</strong> <?= $message ?>
@@ -68,7 +68,8 @@ require_once("./controllers/userAddFlight_controller.php");
                         <div class="mb-3"><label class="form-label" for="Txt_Meteo">Météo</label><textarea class="form-control" id="Txt_Meteo" rows="3" name="Txt_Meteo" required placeholder="Ex: LSMP 060520Z AUTO VRB01KT 9999NDV BKN087 07/02 Q1012 RMK" maxlength="512"><?=$weather?></textarea></div>
                         <div class="mb-3"><label class="form-label" for="Nb_Passengers">Nombre de passagers</label><input class="form-control item" type="number" id="Nb_Passengers" name="Nb_Passengers" required min="0" max="99999999999" value="<?=$passengers?>"></div>
                         <div class="mb-3"><label class="form-label" for="Txt_Note">Notes</label><textarea class="form-control" id="Txt_Note" rows="3" name="Txt_Note" maxlength="1024"><?=$notes?></textarea></div>
-                        <button class="btn btn-primary" type="submit">Enregistrer le vol</button>
+                        <div class="mb-3"><input type="file" files name="media[]" multiple accept=".png, .gif, .jpg, .jpeg">(.gif,.png,.jpeg,.jpg seulement)</div>
+                        <button class="btn btn-primary" type="submit" name="AddFlight" value="submit">Enregistrer le vol</button>
                     </form>
                 </div>
             </section><!-- End: User Log Book Form -->
