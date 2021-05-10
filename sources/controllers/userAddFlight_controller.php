@@ -75,6 +75,7 @@ function validateDate($date)
 //we reset the message
 $message = "";
 $successMessage = "";
+$error ="";
 //if all data are not empty
 if (!empty($btn)) {
 
@@ -215,10 +216,11 @@ if (!empty($btn)) {
     // available types of file
     $types = array('image');
 
-    // si on souhaite envoyer quelque chose...
+    // we check that the user have clicked on the button
     if ($btn != 'null') {
         if ($_FILES['media']['name'][0] != "") {
             DBConnection::startTransaction();
+            //we check the size of the image
             foreach ($_FILES['media']['size'] as $key => $value) {
                 if ($value > $MAX_FILE_SIZE) {
                     $error = 'File too heavy.';
@@ -227,7 +229,7 @@ if (!empty($btn)) {
                     $size_total += $value;
                 }
             }
-
+            //if there is images we check each media size
             if (isset($_FILES['media'])) {
                 for ($i = 0; $i < $nb_files; $i++) {
                     $errorimg = $_FILES['media']["error"][$i];
@@ -235,6 +237,7 @@ if (!empty($btn)) {
                         $error = "Fichier trop volumineux!";
                         DBConnection::rollback();
                     } else {
+                        //we check the mime type
                         $separator = '/';
                         $extension = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[1];
                         $type = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[0];
@@ -244,14 +247,13 @@ if (!empty($btn)) {
                             DBConnection::rollback();
                         } else {
                             if ($error != "erreur dans le type de fichier") {
-                                if ($errorimg[0] == 0) {
-                                    //echo "upload reussi";
+                                if ($errorimg[0] == 0) {//if there is no error, we add the file
                                     $tmp_name = $_FILES['media']["name"][$i];
                                     $name = explode(".", $tmp_name);
                                     $name = $name[0] . uniqid() . "." . $name[1];
 
                                     if (move_uploaded_file($_FILES['media']["tmp_name"][$i], $default_dir . $type . "/" . $name)) {
-                                        //ajout du nom du fichier dans la bd
+                                        //add the filename in the database
                                         MediaDAO::changePath($name, $tmp_name[$i]);
                                         $lienimg = $default_dir . $type . "/" . $name;
                                     } else {

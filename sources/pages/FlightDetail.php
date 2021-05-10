@@ -156,9 +156,7 @@ require_once("./controllers/flightDetail_controller.php");
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Cell 1</td>
-                                    </tr>
+                                    <?=showAllPicturesFromTheFlight($flightId)?>
                                 </tbody>
                             </table>
                         </div>

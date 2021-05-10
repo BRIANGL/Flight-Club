@@ -8,9 +8,11 @@
 require_once "./sql/userDAO.php";
 require_once "./sql/flightDAO.php";
 require_once "./sql/groupDAO.php";
+require_once "./sql/mediaDAO.php";
 
 use FlightClub\sql\FlightDAO;
 use FlightClub\sql\GroupDAO;
+use FlightClub\sql\MediaDAO;
 use FlightClub\sql\userDAO;
 
 //we check if the user is already loged-in
@@ -53,7 +55,7 @@ if (!$isAllowedToSeeThisFlight) {
     exit();
 }
 
-//we get all flight from the current user
+//we get the flight from the current user with the id in the url
 $userFlight = FlightDAO::getFlightById($flightId);
 
 /**
@@ -71,4 +73,14 @@ function computeTotalTime($Dt_Departure, $Dt_Arrival)
     //If you want it in minutes, you can divide the difference by 60 instead
     $mins = (int)(($end - $start) / 60);
     echo $mins . ' minute(s) ' . '<br>';
+}
+
+function showAllPicturesFromTheFlight($idFlight){
+    $picture = MediaDAO::readMediaByIdFlight($idFlight);
+    foreach ($picture as $key => $value) {
+        echo" <tr><td><img class='img-thumbnail' src='" . $value['Txt_File_Path'] . "'></td></tr>";
+    }
+    if (empty($picture)) {
+        echo" <tr><td>Aucune image pour ce vol</td></tr>";
+    }
 }
