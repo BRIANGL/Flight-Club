@@ -67,9 +67,15 @@ class MediaDAO
         }
     }
 
+    /**
+     * Get all the data from a picture id
+     *
+     * @param int $id
+     * @return array
+     */
     public static function read_media_by_id($id)
     {
-        $sql = "SELECT * FROM `media` WHERE `idMedia` = :id";
+        $sql = "SELECT * FROM `tbl_picture` WHERE `Id_Picture` = :id";
 
         $query = DBConnection::getConnection()->prepare($sql);
 
@@ -131,10 +137,16 @@ class MediaDAO
         ]);
     }
 
+    /**
+     * Remove a picture in the database identified by his id
+     *
+     * @param int $idMedia
+     * @return void
+     */
     public static function del_mediaByIdMedia($idMedia)
     {
         $db = DBConnection::getConnection();
-        $sql = "DELETE FROM `media` WHERE `media`.`idMedia` = :id";
+        $sql = "DELETE FROM `tbl_picture` WHERE `Id_Picture` = :id";
         $q = $db->prepare($sql);
         $q->execute([
             ':id' => $idMedia,

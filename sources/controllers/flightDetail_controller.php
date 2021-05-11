@@ -75,6 +75,12 @@ function computeTotalTime($Dt_Departure, $Dt_Arrival)
     echo $mins . ' minute(s) ' . '<br>';
 }
 
+/**
+ * Function that get all pictures from a flight with the id of the flight
+ *
+ * @param int $idFlight
+ * @return void
+ */
 function showAllPicturesFromTheFlight($idFlight){
     $picture = MediaDAO::readMediaByIdFlight($idFlight);
     foreach ($picture as $key => $value) {

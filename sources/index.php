@@ -94,6 +94,9 @@ if (isset($page)) {
         case 'downloadCsv':
             require("./pages/DownloadCsv.php");
             break;
+        case 'ajax':
+            require("./pages/ajax.php");
+            break;
         case '404':
             require("./pages/404.php");
             break;

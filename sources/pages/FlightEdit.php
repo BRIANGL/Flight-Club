@@ -3,7 +3,7 @@
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/05)
- * Detailed flight page here
+ * Edit flight page here
  */
 
 require_once("./controllers/flightEdit_controller.php");
@@ -40,7 +40,7 @@ require_once("./controllers/flightEdit_controller.php");
                         <h2 class="text-info">Éditer un vol</h2>
                         <p>Modifiez votre vol en détail</p>
                     </div>
-                    <form style="max-width: 100%;" method="POST" action="">
+                    <form style="max-width: 100%;" method="POST" action="" enctype="multipart/form-data">
                         <?php if ($message != "") { ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Erreur !</strong> <?= $message ?>
@@ -102,10 +102,10 @@ require_once("./controllers/flightEdit_controller.php");
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Departure" name="Dttm_Departure" value="<?= $userFlight['Dttm_Departure'] ?>" required></div>
+                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Departure" name="Dttm_Departure" value="<?= $goodDateTimeDepartureFormat ?>" required></div>
                                         </td>
                                         <td>
-                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Arrival" name="Dttm_Arrival" value="<?= $userFlight['Dttm_Arrival'] ?>" required></div>
+                                            <div class="mb-3"><input class="form-control item" type="datetime-local" id="Dttm_Arrival" name="Dttm_Arrival" value="<?= $goodDateTimeArrivalFormat ?>" required></div>
                                         </td>
                                         <td><?= computeTotalTime($userFlight['Dttm_Departure'], $userFlight['Dttm_Arrival']) ?></td>
                                     </tr>
@@ -229,14 +229,15 @@ require_once("./controllers/flightEdit_controller.php");
                                         <th>Images du vol</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cell 1</td>
-                                    </tr>
+                                <tbody id="pictureContainer">
+                                    <div id="loading"></div>
+                                    <div id="error"></div>
+                                    <?= showAllPicturesFromTheFlight($flightId) ?>
                                 </tbody>
                             </table>
                         </div>
-                        <button class="btn btn-primary" type="submit">Modifier le vol</button>
+                        <div class="mb-3"><input type="file" files name="media[]" multiple accept=".png, .gif, .jpg, .jpeg">(.gif,.png,.jpeg,.jpg seulement)</div>
+                        <button class="btn btn-primary" type="submit" name="btnModify" value="Modify">Modifier le vol</button>
                     </form>
                 </div>
             </section>
@@ -247,6 +248,46 @@ require_once("./controllers/flightEdit_controller.php");
     require_once("./assets/php/footer.php");
     ?>
     <!-- End: Footer Dark -->
+    <!-- javascript code --->
+    <script type="text/javascript">
+        /**
+         * Function that remove an image from the database and the server
+         *
+         * @param int idToDelete
+         * @return void
+         */
+        function deleteJS(idToDelete, flightId) {
+            //we initialize our variable with the content location
+            var loadingDiv = document.getElementById("loading");
+            var pictureContainer = document.getElementById("pictureContainer");
+            var errorDiv = document.getElementById("error");
+
+            //we check that the id to delete is not null
+            if (idToDelete == null) {
+                errorDiv.innerHTML = "Error";
+                return;
+            } else { //if the id to delete is not null we show a loading gif and wait for the function to finish executing
+                loadingDiv.innerHTML = "<img src='./assets/img/loading.gif' alt='loading'>";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) { //if the function has finished and is a success, we remove the loading gif and we show the new image content
+                        loadingDiv.innerHTML = "";
+                        errorDiv.innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Succès !</strong> L'image à été supprimée avec succès</div>"
+                        pictureContainer.innerHTML = this.responseText;
+                    }
+                    else if(this.readyState == 4 && this.status != 200) {//if the function has finished but there was an error in the process
+                        loadingDiv.innerHTML = "";
+                        errorDiv.innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Erreur !</strong> Veuillez rafraîchir la page et réessayer</div>"
+                        pictureContainer.innerHTML = "";
+                    }
+                }
+                //we go on the page ajax with the id to delete parameter
+                xmlhttp.open("POST", "?page=ajax", true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send("IdImg=" + idToDelete + "&IdFlight=" + flightId);
+            }
+        }
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js?h=1eb47230ed13e88113270f63f470e160"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/vanilla-zoom.js?h=6a37ea9c996b05f763161c73127d66bc"></script>

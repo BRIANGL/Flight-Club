@@ -16,7 +16,6 @@ require_once("./sql/dbConnection.php");
 use FlightClub\sql\FlightDAO;
 use FlightClub\sql\MediaDAO;
 use FlightClub\sql\DBConnection;
-use M152\sql\MediaDAO as SqlMediaDAO;
 
 //check if the user is not already connected
 if (!isset($_SESSION['userID'])) {
