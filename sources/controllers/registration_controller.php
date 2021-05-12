@@ -66,30 +66,34 @@ $password2 = filter_input(INPUT_POST, "password2", FILTER_SANITIZE_STRING);
 $message = "";
 //if all data are not empty
 if (!empty($email) && !empty($password) && !empty($password2)) {
-    //we check that the email is not already in our database
-    if (userDAO::readEmail($email) == null) {
-        //we check booth of the password are the same and the strength of the password
-        if ($password === $password2) {
-            if (password_strength($password)) {
-                //we hash the password
-                $hashed = hash('sha512', $password);
-                $salted = substr($hashed, 0, 20) . $hashed . substr($hashed, 50, 70);
-                $hashed = hash('sha512', $salted);
-                //we add a php generated salt
-                $salt = password_hash($hashed, PASSWORD_BCRYPT);
-                //we add it to the database
-                userDAO::AddUsers($email, $hashed, $salt);
-                $_SESSION['user'] = userDAO::readUsersByEmail($email);
-                //we redirect him to the login page
-                header("Location: ./index.php?page=login");
-                exit();
+    if (strlen($email) < 100) {
+        //we check that the email is not already in our database
+        if (userDAO::readEmail($email) == null) {
+            //we check booth of the password are the same and the strength of the password
+            if ($password === $password2) {
+                if (password_strength($password)) {
+                    //we hash the password
+                    $hashed = hash('sha512', $password);
+                    $salted = substr($hashed, 0, 20) . $hashed . substr($hashed, 50, 70);
+                    $hashed = hash('sha512', $salted);
+                    //we hash again with password hash
+                    $hashed = password_hash($hashed, PASSWORD_BCRYPT);
+                    //we add it to the database
+                    userDAO::AddUsers($email, $hashed);
+                    $_SESSION['user'] = userDAO::readUsersByEmail($email);
+                    //we redirect him to the login page
+                    header("Location: ./index.php?page=login");
+                    exit();
+                } else {
+                    $message = "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial et faire 8 caractère ou plus!";
+                }
             } else {
-                $message = "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial et faire 8 caractère ou plus!";
+                $message = "Les mots de passes ne sont pas identiques !";
             }
         } else {
-            $message = "Les mots de passes ne sont pas identiques !";
+            $message = "L'email existe déjà";
         }
-    } else {
-        $message = "L'email existe déjà";
+    }else {
+        $message = "L'email est trop long";
     }
 }

@@ -8,8 +8,6 @@
 require_once "./sql/userDAO.php";
 require_once "./sql/groupDAO.php";
 
-use AnonyVote\sql\UserDAO as SqlUserDAO;
-use CreAmour\sql\UserDAO as CreAmourSqlUserDAO;
 use FlightClub\sql\GroupDAO;
 use FlightClub\sql\userDAO;
 

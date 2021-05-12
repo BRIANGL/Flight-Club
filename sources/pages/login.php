@@ -43,7 +43,7 @@ require_once("./controllers/login_controller.php");
                                 <strong>Erreur !</strong> <?= $message ?>
                             </div>
                         <?php } ?>
-                        <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" required></div>
+                        <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" required value="<?=$email?>"></div>
                         <div class="mb-3"><label class="form-label" for="password">Mot de passe</label><input class="form-control" type="password" id="password" name="password" required></div>
                         <button class="btn btn-primary" type="submit">Se connecter</button>
                     </form>

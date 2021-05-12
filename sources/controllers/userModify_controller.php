@@ -30,7 +30,7 @@ if (!empty($newPassword) && !empty($repeatNewPassword) && !empty($oldPassword)) 
     $hashed = hash('sha512', $salted);
 
     //we compare the hashed password of the user with the one in the database
-    if (password_verify($hashed, userDAO::getUserByEmail(UserDAO::getUserByID($_SESSION['userID'])['Txt_Email'])['Txt_Password_Salt'])) {
+    if (password_verify($hashed, userDAO::getUserByEmail(UserDAO::getUserByID($_SESSION['userID'])['Txt_Email'])['Txt_Password_Hash'])) {
         //we check that booth of the new password are the same
         if ($newPassword == $repeatNewPassword) {
             //we hash the new password to make it work with the login
@@ -38,11 +38,11 @@ if (!empty($newPassword) && !empty($repeatNewPassword) && !empty($oldPassword)) 
             $salted = substr($hashed, 0, 20) . $hashed . substr($hashed, 50, 70);
             $hashed = hash('sha512', $salted);
 
-            //we create a salt with the new password
-            $salt = password_hash($hashed, PASSWORD_BCRYPT);
+            //we hash again with password hash
+            $hashed = password_hash($hashed, PASSWORD_BCRYPT);
 
             //we update the password in the database
-            UserDAO::changePassword($_SESSION['userID'], $hashed, $salt);
+            UserDAO::changePassword($_SESSION['userID'], $hashed);
             //we display a success message to the user
             $messageSucces = "Mot de passe changé avec succès";
         }else {

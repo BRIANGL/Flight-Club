@@ -27,7 +27,7 @@ if (!empty($email) && !empty($password)) {
     $hashed = hash('sha512', $salted);
 
     //we compare the hashed password of the user with the one in the database
-    if (password_verify($hashed, userDAO::getUserByEmail($email)['Txt_Password_Salt'])) {
+    if (password_verify($hashed, userDAO::getUserByEmail($email)['Txt_Password_Hash'])) {
         //we connect the user in session
         $_SESSION['connected'] = true;
         $_SESSION['userID'] = userDAO::getUserByEmail($email)['Id_User'];

@@ -44,7 +44,7 @@ require_once("./controllers/registration_controller.php");
                                 <strong>Erreur !</strong> <?= $message ?>
                             </div>
                         <?php } ?>
-                        <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email"></div>
+                        <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email" value="<?=$email?>"></div>
                         <div class="mb-3"><label class="form-label" for="password">Mot de passe</label><input class="form-control item" type="password" id="password" name="password"></div>
                         <div class="mb-3"><label class="form-label" for="password2">Répétez votre mot de passe</label><input class="form-control item" type="password" id="password2" name="password2"></div>
                         <button class="btn btn-primary" type="submit">S'enregistrer</button>

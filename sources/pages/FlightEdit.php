@@ -41,16 +41,22 @@ require_once("./controllers/flightEdit_controller.php");
                         <p>Modifiez votre vol en détail</p>
                     </div>
                     <form style="max-width: 100%;" method="POST" action="" enctype="multipart/form-data">
-                        <?php if ($message != "") { ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Erreur !</strong> <?= $message ?>
-                            </div>
-                        <?php } ?>
-                        <?php if ($successMessage != "") { ?>
+                        <?php if ($message != "") {
+
+                            foreach ($message as $key => $value) {
+                        ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Erreur !</strong> <?= $value ?>
+                                </div>
+                        <?php }
+                        } ?>
+                        <?php if ($successMessage != "") {
+                        ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Erreur !</strong> <?= $successMessage ?>
+                                <strong>Succès !</strong> <?= $successMessage ?>
                             </div>
-                        <?php } ?>
+                        <?php
+                        } ?>
                         <div class="table-responsive">
                             <h2 class="text-info">Aéronef</h2>
                             <table class="table">
@@ -114,7 +120,6 @@ require_once("./controllers/flightEdit_controller.php");
                                     <tr>
                                         <th>Moteur allumé</th>
                                         <th>Moteur eteint</th>
-                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,7 +130,6 @@ require_once("./controllers/flightEdit_controller.php");
                                         <td>
                                             <div class="mb-3"><input class="form-control item" type="time" id="Tm_Engine_Off" name="Tm_Engine_Off" value="<?= $userFlight['Tm_Engine_Off'] ?>"></div>
                                         </td>
-                                        <td><?= computeTotalTime($userFlight['Dttm_Departure'], $userFlight['Dttm_Arrival'], $userFlight['Tm_Engine_On'], $userFlight['Tm_Engine_Off']) ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -236,6 +240,7 @@ require_once("./controllers/flightEdit_controller.php");
                                 </tbody>
                             </table>
                         </div>
+                        <input type="hidden" name="deletedImg" id="deletedImg" value="">
                         <div class="mb-3"><input type="file" files name="media[]" multiple accept=".png, .gif, .jpg, .jpeg">(.gif,.png,.jpeg,.jpg seulement)</div>
                         <button class="btn btn-primary" type="submit" name="btnModify" value="Modify">Modifier le vol</button>
                     </form>
@@ -256,36 +261,13 @@ require_once("./controllers/flightEdit_controller.php");
          * @param int idToDelete
          * @return void
          */
-        function deleteJS(idToDelete, flightId) {
+        function deleteJS(idToDelete) {
             //we initialize our variable with the content location
-            var loadingDiv = document.getElementById("loading");
-            var pictureContainer = document.getElementById("pictureContainer");
-            var errorDiv = document.getElementById("error");
+            var idContainer = document.getElementById("deletedImg").value += idToDelete + ",";
+            var imgToHide = document.getElementById(idToDelete);
 
-            //we check that the id to delete is not null
-            if (idToDelete == null) {
-                errorDiv.innerHTML = "Error";
-                return;
-            } else { //if the id to delete is not null we show a loading gif and wait for the function to finish executing
-                loadingDiv.innerHTML = "<img src='./assets/img/loading.gif' alt='loading'>";
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) { //if the function has finished and is a success, we remove the loading gif and we show the new image content
-                        loadingDiv.innerHTML = "";
-                        errorDiv.innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Succès !</strong> L'image à été supprimée avec succès</div>"
-                        pictureContainer.innerHTML = this.responseText;
-                    }
-                    else if(this.readyState == 4 && this.status != 200) {//if the function has finished but there was an error in the process
-                        loadingDiv.innerHTML = "";
-                        errorDiv.innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Erreur !</strong> Veuillez rafraîchir la page et réessayer</div>"
-                        pictureContainer.innerHTML = "";
-                    }
-                }
-                //we go on the page ajax with the id to delete parameter
-                xmlhttp.open("POST", "?page=ajax", true);
-                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send("IdImg=" + idToDelete + "&IdFlight=" + flightId);
-            }
+            imgToHide.innerHTML = "";
+            console.log(idContainer)
         }
     </script>
     <script src="assets/bootstrap/js/bootstrap.min.js?h=1eb47230ed13e88113270f63f470e160"></script>

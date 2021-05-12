@@ -5,11 +5,9 @@
  * @version 1.0 (2021/05/04)
  * group invites logic here
  */
-require_once "./sql/userDAO.php";
 require_once "./sql/groupDAO.php";
 
 use FlightClub\sql\GroupDAO;
-use FlightClub\sql\userDAO;
 
 //we check if the user is already loged-in
 if (!isset($_SESSION['userID'])) {

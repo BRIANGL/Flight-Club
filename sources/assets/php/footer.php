@@ -4,7 +4,7 @@
                 <div class="col-sm-3">
                     <h5>Support</h5>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="?page=faq">FAQ</a></li>
                     </ul>
                 </div>
         </div>

@@ -97,6 +97,9 @@ if (isset($page)) {
         case 'ajax':
             require("./pages/ajax.php");
             break;
+        case 'faq':
+            require("./pages/FAQ.php");
+            break;
         case '404':
             require("./pages/404.php");
             break;

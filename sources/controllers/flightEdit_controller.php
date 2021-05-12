@@ -40,8 +40,10 @@ $weather = filter_input(INPUT_POST, "Txt_Meteo", FILTER_SANITIZE_STRING);
 $passengers = filter_input(INPUT_POST, "Nb_Passengers", FILTER_SANITIZE_NUMBER_INT);
 $notes = filter_input(INPUT_POST, "Txt_Note", FILTER_SANITIZE_STRING);
 $btn = filter_input(INPUT_POST, 'btnModify', FILTER_SANITIZE_STRING);
+$imgToDelete = filter_input(INPUT_POST, 'deletedImg', FILTER_SANITIZE_STRING);
 
 $validTime = true;
+$engineTime = false;
 
 $goodDateTimeDepartureFormat = "";
 $goodDateTimeArrivalFormat = "";
@@ -49,6 +51,7 @@ $resetTimeDeparture = "";
 $resetTimeArrival = "";
 $resetTimeEngineOn = "";
 $resetTimeEngineOff = "";
+$error = "";
 /**
  * Function found on Stack overflow to check if a time is valid. Found at: https://stackoverflow.com/questions/3964972/validate-that-input-is-in-this-time-format-hhmm
  *
@@ -103,11 +106,9 @@ if (!$isAllowedToSeeThisFlight) {
 //we get all flight from the current user
 $userFlight = FlightDAO::getFlightById($flightId);
 
-
 //we reset the message
-$message = "";
+$message = array();
 $successMessage = "";
-$error = "";
 //if all data are not empty
 if (!empty($btn)) {
     if (
@@ -115,189 +116,217 @@ if (!empty($btn)) {
         !empty($typeAircraft) && !empty($registrationPlane) && !empty($icaoDeparture) && !empty($icaoArrival) && !empty($flightType)
         && !empty($flightMode) && !empty($weather) && $passengers != ""
     ) {
-        //we check that the data is valid
-        if (strlen($icaoDeparture) == 4 && strlen($icaoArrival) == 4) {
-            //check that dates are valid
-            if (validateDate($dateDeparture) && validateDate($dateArrival)) {
-                //check the validity of the hours of the take off time and landing time
-                if (checkTime(explode("T", $dateDeparture)[1]) && checkTime(explode("T", $dateArrival)[1])) {
-                    $validTime = true;
-                    //check the validity of the hours for the engine off and engine on time
-                    if (!empty($timeEngineOn) && !empty($timeEngineOff)) {
-                        if (checkTime(explode(":", $timeEngineOn)[0] . ":" . explode(":", $timeEngineOn)[1]) && checkTime(explode(":", $timeEngineOff)[0] . ":" . explode(":", $timeEngineOff)[1])) {
-                            $validTime = true;
-                        } else {
-                            $validTime = false;
-                        }
-                    } else {
-                        $timeEngineOff = null;
-                        $timeEngineOn = null;
-                    }
-                    if ($validTime) {
-                        //check that the type of aircraft doesn't blow the database
-                        if (strlen($typeAircraft) <= 45) {
-                            //check that the registration of the aircraft doesn't blow the database
-                            if (strlen($registrationPlane) <= 45) {
-                                //check that the flight type doesn't blow the database
-                                if (strlen($flightType) <= 45) {
-                                    //check that the flight mode doesn't blow the database
-                                    if (strlen($flightMode) <= 45) {
-                                        //check that the weather doesn't blow the database
-                                        if (strlen($weather) <= 512) {
-                                            //check that the passengers number doesn't blow the database
-                                            if ($passengers <= 99999999999 && $passengers >= 0) {
-                                                //check that the notes doesn't blow the database
-                                                if (strlen($notes) <= 1024) {
-                                                    //every data is correct
-
-                                                    //we check with is the latest id in the database
-                                                    $allflight = FlightDAO::getAllFlightOrderById();
-                                                    try {
-
-                                                        //converting departure datetime to a good datetime
-                                                        $dateDeparture = explode("T", $dateDeparture);
-                                                        $dateDeparture = $dateDeparture[0] . " " . $dateDeparture[1];
-
-                                                        //converting arrival datetime to a good datetime
-                                                        $dateArrival = explode("T", $dateArrival);
-                                                        $dateArrival = $dateArrival[0] . " " . $dateArrival[1];
-
-                                                        FlightDAO::editFlight(
-                                                            $flightId,
-                                                            $_SESSION['userID'],
-                                                            $role,
-                                                            strtoupper($flight),
-                                                            $dateDeparture,
-                                                            $dateArrival,
-                                                            $timeEngineOn,
-                                                            $timeEngineOff,
-                                                            $typeAircraft,
-                                                            strtoupper($registrationPlane),
-                                                            strtoupper($icaoDeparture),
-                                                            strtoupper($icaoArrival),
-                                                            $flightType,
-                                                            $flightMode,
-                                                            $weather,
-                                                            $passengers,
-                                                            $notes
-                                                        );
-                                                        $successMessage = "Vol enregistrer avec succès!";
-
-                                                        //we get the new data to show to the user
-                                                        $userFlight = FlightDAO::getFlightById($flightId);
-                                                    } catch (\Throwable $th) {
-                                                        $message = "Une erreure est survenue. merci de réessayer";
-                                                    }
-                                                } else {
-                                                    $message = "Les notes sonts trop longues";
-                                                }
-                                            } else {
-                                                $message = "Le nombre de passagers est invalide";
-                                            }
-                                        } else {
-                                            $message = "La météo est trop longue";
-                                        }
-                                    } else {
-                                        $message = "Le mode de vol est trop long";
-                                    }
-                                } else {
-                                    $message = "Le type de vol est trop long";
-                                }
-                            } else {
-                                $message = "L'immatriculation de l'avion est trop longue";
-                            }
-                        } else {
-                            $message = "Le type d'avion est trop long";
-                        }
-                    } else {
-                        $message = "L'heure saisie n'est pas valide";
-                    }
-                } else {
-                    $message = "L'heure saisie n'est pas valide";
-                }
+    } else {
+        $message[] = "Entrez tout les champs";
+    }
+    //we check that the data is valid
+    if (strlen($icaoDeparture) == 4 && strlen($icaoArrival) == 4) {
+    } else {
+        $message[] = "Vérifiez les codes ICAO";
+    }
+    //check that dates are valid
+    if (validateDate($dateDeparture) && validateDate($dateArrival)) {
+    } else {
+        $message[] = "La date n'est pas valide";
+    }
+    //check the validity of the hours of the take off time and landing time
+    if (checkTime(explode(":", (explode("T", $dateDeparture)[1]))[0] . ":" . explode(":", (explode("T", $dateDeparture)[1]))[1]) && checkTime(explode(":", (explode("T", $dateArrival)[1]))[0] . ":" . explode(":", (explode("T", $dateArrival)[1]))[1])) {
+        $validTime = true;
+        //check the validity of the hours for the engine off and engine on time
+        if (!empty($timeEngineOn) && !empty($timeEngineOff)) {
+            $engineTime = true;
+            if (checkTime(explode(":", $timeEngineOn)[0] . ":" . explode(":", $timeEngineOn)[1]) && checkTime(explode(":", $timeEngineOff)[0] . ":" . explode(":", $timeEngineOff)[1])) {
+                $validTime = true;
             } else {
-                $message = "La date n'est pas valide";
+                $validTime = false;
             }
         } else {
-            $message = "Vérifiez les codes ICAO";
+            $timeEngineOff = null;
+            $timeEngineOn = null;
         }
     } else {
-        $message = "Entrez tout les champs";
+        $message[] = "L'heure saisie n'est pas valide";
     }
-    ////FILE UPLOAD
+    if ($validTime && $engineTime) {
+        //check that the type of aircraft doesn't blow the database
+    } else {
+        $message[] = "L'heure saisie n'est pas valide";
+    }
+    if (strlen($typeAircraft) <= 45) {
+        //check that the registration of the aircraft doesn't blow the database
+    } else {
+        $message[] = "Le type d'avion est trop long";
+    }
+    if (strlen($registrationPlane) <= 45) {
+        //check that the flight type doesn't blow the database
+    } else {
+        $message[] = "L'immatriculation de l'avion est trop longue";
+    }
+    if (strlen($flightType) <= 45) {
+        //check that the flight mode doesn't blow the database
+    } else {
+        $message[] = "Le type de vol est trop long";
+    }
+    if (strlen($flightMode) <= 45) {
+        //check that the weather doesn't blow the database
+    } else {
+        $message[] = "Le mode de vol est trop long";
+    }
+    if (strlen($weather) <= 512) {
+        //check that the passengers number doesn't blow the database
+    } else {
+        $message[] = "La météo est trop longue";
+    }
+    if ($passengers <= 99999999999 && $passengers >= 0) {
+        //check that the notes doesn't blow the database
+    } else {
+        $message[] = "Le nombre de passagers est invalide";
+    }
+    if (strlen($notes) <= 1024) {
+        //every data is correct
+    } else {
+        $message[] = "Les notes sonts trop longues";
+    }
 
-    $name = "";
-    $lienimg = "";
-    $default_dir = "./media/";
-    $errorimg = "";
-    $size_total = 0;
-    $error = "";
-    $type = '';
-    $extension = '';
-    $nb_files = count($_FILES['media']['name']);
-    $MAX_FILE_SIZE = 3145728;    // 3MB in bytes
-    $MAX_POST_SIZE = 73400320;  // 70MB in bytes
+    if (empty($message)) {
 
-    $extensions = array(
-        "image" => array('.png', '.gif', '.jpg', '.jpeg'),
-    );
-    // available types of file
-    $types = array('image');
+        //we check with is the latest id in the database
+        $allflight = FlightDAO::getAllFlightOrderById();
+        try {
 
-    // we check that the user have clicked on the button
-    if ($btn != 'null') {
-        if ($_FILES['media']['name'][0] != "") {
+            //converting departure datetime to a good datetime
+            $dateDeparture = explode("T", $dateDeparture);
+            $dateDeparture = $dateDeparture[0] . " " . $dateDeparture[1];
+
+            //converting arrival datetime to a good datetime
+            $dateArrival = explode("T", $dateArrival);
+            $dateArrival = $dateArrival[0] . " " . $dateArrival[1];
+
+            //we edit the flight
+            FlightDAO::editFlight(
+                $flightId,
+                $_SESSION['userID'],
+                $role,
+                strtoupper($flight),
+                $dateDeparture,
+                $dateArrival,
+                $timeEngineOn,
+                $timeEngineOff,
+                $typeAircraft,
+                strtoupper($registrationPlane),
+                strtoupper($icaoDeparture),
+                strtoupper($icaoArrival),
+                $flightType,
+                $flightMode,
+                $weather,
+                $passengers,
+                $notes
+            );
+            $successMessage = "Vol modifié avec succès!";
+
+            //we get the new data to show to the user
+            $userFlight = FlightDAO::getFlightById($flightId);
+        } catch (\Throwable $th) {
+            $message = "Une erreure est survenue. merci de réessayer";
+        }
+
+        //we check if there is some images to delete
+        if (!empty($imgToDelete)) {
             DBConnection::startTransaction();
-            //we check the size of the image
-            foreach ($_FILES['media']['size'] as $key => $value) {
-                if ($value > $MAX_FILE_SIZE) {
-                    $error = 'File too heavy.';
-                    DBConnection::rollback();
-                } else {
-                    $size_total += $value;
+            $imgToDelete = explode(",", $imgToDelete);
+            unset($imgToDelete[count($imgToDelete) - 1]);
+            $pathToDelete = "";
+            // we try to remove each image
+            try {
+                foreach ($imgToDelete as $key => $value) {
+                    $pathToDelete = MediaDAO::read_media_by_id($value);
+                    MediaDAO::del_mediaByIdMedia($value);
+                    unlink($pathToDelete['Txt_File_Path']);
                 }
+                DBConnection::commit();
+            } catch (\Throwable $th) {//if there was an error, we rollback
+                DBConnection::rollback();
+                $message[] = "Une erreur est survenue lors de la suppression du media";
             }
-            //if there is images we check each media size
-            if (isset($_FILES['media'])) {
-                for ($i = 0; $i < $nb_files; $i++) {
-                    $errorimg = $_FILES['media']["error"][$i];
-                    if ($error == 'File too heavy.' || $size_total > $MAX_POST_SIZE) {
-                        $error = "Fichier trop volumineux!";
+        }
+
+
+
+        ////FILE UPLOAD
+
+        $name = "";
+        $lienimg = "";
+        $default_dir = "./media/";
+        $errorimg = "";
+        $size_total = 0;
+        $error = "";
+        $type = '';
+        $extension = '';
+        $nb_files = count($_FILES['media']['name']);
+        $MAX_FILE_SIZE = 3145728;    // 3MB in bytes
+        $MAX_POST_SIZE = 73400320;  // 70MB in bytes
+
+        $extensions = array(
+            "image" => array('.png', '.gif', '.jpg', '.jpeg'),
+        );
+        // available types of file
+        $types = array('image');
+
+        // we check that the user have clicked on the button
+        if ($btn != 'null') {
+            if ($_FILES['media']['name'][0] != "") {
+                DBConnection::startTransaction();
+                //we check the size of the image
+                foreach ($_FILES['media']['size'] as $key => $value) {
+                    if ($value > $MAX_FILE_SIZE) {
+                        $error = 'File too heavy.';
                         DBConnection::rollback();
                     } else {
-                        //we check the mime type
-                        $separator = '/';
-                        $extension = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[1];
-                        $type = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[0];
-
-                        if (!in_array($type, $types)) {
-                            $error = "erreur dans le type de fichier";
+                        $size_total += $value;
+                    }
+                }
+                //if there is images we check each media size
+                if (isset($_FILES['media'])) {
+                    for ($i = 0; $i < $nb_files; $i++) {
+                        $errorimg = $_FILES['media']["error"][$i];
+                        if ($error == 'File too heavy.' || $size_total > $MAX_POST_SIZE) {
+                            $error = "Fichier trop volumineux!";
                             DBConnection::rollback();
                         } else {
-                            if ($error != "erreur dans le type de fichier") {
-                                if ($errorimg[0] == 0) { //if there is no error, we add the file
-                                    $tmp_name = $_FILES['media']["name"][$i];
-                                    $name = explode(".", $tmp_name);
-                                    $name = $name[0] . uniqid() . "." . $name[1];
+                            //we check the mime type
+                            $separator = '/';
+                            $extension = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[1];
+                            $type = explode($separator, mime_content_type($_FILES['media']['tmp_name'][$i]))[0];
 
-                                    if (move_uploaded_file($_FILES['media']["tmp_name"][$i], $default_dir . $type . "/" . $name)) {
-                                        //add the filename in the database
-                                        MediaDAO::changePath($name, $tmp_name[$i]);
-                                        $lienimg = $default_dir . $type . "/" . $name;
-                                    } else {
+                            if (!in_array($type, $types)) {
+                                $error = "erreur dans le type de fichier";
+                                DBConnection::rollback();
+                            } else {
+                                if ($error != "erreur dans le type de fichier") {
+                                    if ($errorimg[0] == 0) { //if there is no error, we add the file
+                                        $tmp_name = $_FILES['media']["name"][$i];
+                                        $name = explode(".", $tmp_name);
+                                        $name = $name[0] . uniqid() . "." . $name[1];
+
+                                        if (move_uploaded_file($_FILES['media']["tmp_name"][$i], $default_dir . $type . "/" . $name)) {
+                                            //add the filename in the database
+                                            MediaDAO::changePath($name, $tmp_name[$i]);
+                                            $lienimg = $default_dir . $type . "/" . $name;
+                                        } else {
+                                            DBConnection::rollback();
+                                        }
+                                    }
+                                    try { //we add the media in the database
+                                        MediaDAO::addmedia($lienimg, $flightId);
+
+                                        DBConnection::commit();
+                                    } catch (\Throwable $th) {
+                                        $error = $th;
                                         DBConnection::rollback();
                                     }
-                                }
-                                try {
-                                    MediaDAO::addmedia($lienimg, $flightId);
-
-                                    DBConnection::commit();
-                                } catch (\Throwable $th) {
-                                    $error = $th;
+                                } else {
                                     DBConnection::rollback();
                                 }
-                            } else {
-                                DBConnection::rollback();
                             }
                         }
                     }
@@ -307,7 +336,11 @@ if (!empty($btn)) {
     }
 }
 
-$message = $error;
+if ($error != "") {
+    $message .= " " . $error;
+}
+
+
 
 //we get the new data of the pilot of this flight
 $pilotOfThisFlight = userDAO::getUserByFlightID($flightId);
@@ -339,7 +372,7 @@ function showAllPicturesFromTheFlight($idFlight)
 {
     $picture = MediaDAO::readMediaByIdFlight($idFlight);
     foreach ($picture as $key => $value) {
-        echo "<tr><td><img class='img-thumbnail' src='" . $value['Txt_File_Path'] . "'></td><td><button type='button' class='btn btn-danger' name='delete' value='" . $value["Id_Picture"] . "' onclick='deleteJS(" . $value["Id_Picture"] . ", " . $idFlight . ")'>X</button></td></td></tr>";
+        echo "<tr id='" . $value['Id_Picture'] . "'><td><img class='img-thumbnail' src='" . $value['Txt_File_Path'] . "'></td><td><button type='button' class='btn btn-danger' name='delete' value='" . $value["Id_Picture"] . "' onclick='deleteJS(" . $value["Id_Picture"] . ", " . $idFlight . ")'>X</button></td></td></tr>";
     }
     if (empty($picture)) {
         echo " <tr><td>Aucune image pour ce vol</td></tr>";

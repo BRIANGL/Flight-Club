@@ -107,19 +107,17 @@ class UserDAO
      *
      * @param string $email
      * @param string $password
-     * @param string $salt
      * @return void
      */
-    public static function AddUsers($email, $password, $salt)
+    public static function AddUsers($email, $password)
     {
         $db = DBConnection::getConnection();
-        $sql = "INSERT INTO `tbl_user`(`Txt_Email`,`Txt_Password_Hash`,`Txt_Password_Salt`)
-    VALUES (:email, :password, :salt)";
+        $sql = "INSERT INTO `tbl_user`(`Txt_Email`,`Txt_Password_Hash`)
+    VALUES (:email, :password)";
         $request = $db->prepare($sql);
         $request->execute([
             ':email' => $email,
-            ':password' => $password,
-            ':salt' => $salt
+            ':password' => $password
         ]);
     }
 
@@ -168,20 +166,18 @@ class UserDAO
      *
      * @param int $id
      * @param string $password
-     * @param string $salt
      * @return void
      */
-    public static function changePassword($id, $password, $salt)
+    public static function changePassword($id, $password)
     {
         $db = DBConnection::getConnection();
-        $sql = "UPDATE `tbl_user` SET `Txt_Password_Hash` = :password, `Txt_Password_Salt` = :salt WHERE `tbl_user`.`Id_User` = :id";
+        $sql = "UPDATE `tbl_user` SET `Txt_Password_Hash` = :password, WHERE `tbl_user`.`Id_User` = :id";
 
 
         $query = $db->prepare($sql);
 
         $query->execute([
             ':id' => $id,
-            ':salt' => $salt,
             ':password' => $password
         ]);
     }

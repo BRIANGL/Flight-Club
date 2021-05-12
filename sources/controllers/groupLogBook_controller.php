@@ -83,16 +83,19 @@ function computeTotal($users)
     foreach ($users as $key => $value) {
         $flight = FlightDAO::getAllUserFlightByUserId($value['Id_User']);
 
-        
+        //we get the total minute time
         foreach ($flight as $key => $value) {
 
             $totalMinutes += computeTotalTime($value['Dttm_Departure'], $value['Dttm_Arrival']);
         }
     }
+    //we get the hour from the minutes
     $totalHour = floor($totalMinutes / 60);
 
+    //we substract 60 minutes for each hour
     $totalMinutes = ($totalMinutes - (60 * $totalHour));
 
+    //we output the hour and minutes
     echo $totalHour . ":" . $totalMinutes;
 }
 

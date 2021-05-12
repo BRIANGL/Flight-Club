@@ -82,7 +82,7 @@ class MediaDAO
         $query->execute([
             ':id' => $id,
         ]);
-        return $query->fetchall();
+        return $query->fetch();
     }
 
     /**
