@@ -49,6 +49,10 @@ foreach ($groupsOfPilot as $key => $gPValue) {
     }
 }
 
+if ($pilotOfThisFlight['Id_User'] == $_SESSION['userID']) {
+    $isAllowedToSeeThisFlight = true;
+}
+
 //showing the user a 404
 if (!$isAllowedToSeeThisFlight) {
     header("Location: ./index.php?page=404");

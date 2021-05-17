@@ -14,7 +14,7 @@ require_once("./controllers/groupMenu_controller.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Groupes menu - Flight Club</title>
+    <title>Menu de groupe - Flight Club</title>
     <meta name="description" content="Flight Club">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=dce1ced0acba79984dca99bab3de3321">
     <link rel="manifest" href="manifest.json?h=3376faf9af9d01ed3ad3ca66d606c630">

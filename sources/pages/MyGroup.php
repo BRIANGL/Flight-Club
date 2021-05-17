@@ -40,11 +40,21 @@ require_once("./controllers/myGroup_controller.php");
                         <p>Gérez vos groupes!</p>
                     </div>
                     <form method="POST" action="">
+                        <?php if ($errorMessage != "") { ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Erreur !</strong> <?= $errorMessage ?>
+                            </div>
+                        <?php } ?>
+                        <?php if ($successMessage != "") { ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Succès !</strong> <?= $successMessage ?>
+                            </div>
+                        <?php } ?>
                         <table>
                             <?php
                             showGroups();
                             ?>
-                        </table>                        
+                        </table>
                     </form>
                 </div>
             </section>

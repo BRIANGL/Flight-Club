@@ -16,6 +16,26 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
+//we filter the user input value of the button
+$leaveGroup = filter_input(INPUT_POST, 'delete', FILTER_SANITIZE_NUMBER_INT);
+
+//we initialize empty messages
+$errorMessage = "";
+$successMessage = "";
+
+//check if the user clicked on leave group
+if (!empty($leaveGroup)) {
+    try {//we try to remove the user from the group
+        GroupDAO::deletePendingInvite($leaveGroup, $_SESSION['userID']);
+        $successMessage = "Vous avez quitter le groupe!";
+    } catch (\Throwable $th) {
+        //if there was an error
+        $errorMessage = "Une erreur est survenue, veuillez réessayer";
+    }
+}
+
+
+
 
 /**
  * Show all groups of the current user

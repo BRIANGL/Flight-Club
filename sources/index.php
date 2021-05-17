@@ -56,13 +56,13 @@ if (isset($page)) {
             require("./pages/GroupInvites.php");
             break;
         case 'myGroupes':
-            require("./pages/myGroup.php");
+            require("./pages/MyGroup.php");
             break;
         case 'CreateGroups':
             require("./pages/GroupCreate.php");
             break;
         case 'aboutGroup':
-            require("./pages/aboutGroup.php");
+            require("./pages/AboutGroup.php");
             break;
         case 'InviteAMember':
             require("./pages/GroupInviteAMember.php");
@@ -93,9 +93,6 @@ if (isset($page)) {
             break;
         case 'downloadCsv':
             require("./pages/DownloadCsv.php");
-            break;
-        case 'ajax':
-            require("./pages/ajax.php");
             break;
         case 'faq':
             require("./pages/FAQ.php");

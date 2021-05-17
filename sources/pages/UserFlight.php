@@ -15,7 +15,7 @@ require_once("./controllers/userLogBook_controller.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>TPI</title>
+    <title>Mes vols - Flight Club</title>
     <meta name="description" content="TPI GOLAY Brian">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=2fc55c83fda89d85c10ec2813155ab55">
     <link rel="manifest" href="manifest.json?h=44264fee9c6d05944711595970c43d33">
@@ -35,7 +35,7 @@ require_once("./controllers/userLogBook_controller.php");
         <!-- Start: User Log Book Form -->
         <main class="page login-page">
             <section class="clean-block clean-form dark">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="block-heading">
                         <h2 class="text-info">Vos vols</h2>
                         <p>Total des heures: <?=computeTotal($userFlight)?></p>
