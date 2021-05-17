@@ -40,6 +40,11 @@ require_once("./controllers/groupInvites_controller.php");
                         <p>Accéptez ou refusez les invitations de groupes</p>
                     </div>
                     <form method="POST" action="">
+                        <?php if ($successMessage != "") { ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Succès !</strong> <?= $successMessage ?>
+                            </div>
+                        <?php } ?>
                         <div class="table-responsive">
                             <table class="table">
                                 <?php

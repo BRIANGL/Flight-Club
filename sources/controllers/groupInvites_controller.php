@@ -16,16 +16,21 @@ if (!isset($_SESSION['userID'])) {
 }
 
 //check if the user clicked on any of these buttons
-$accept = filter_input(INPUT_POST, "accept");
-$deny = filter_input(INPUT_POST, "delete");
+$accept = filter_input(INPUT_POST, "accept", FILTER_SANITIZE_STRING);
+$deny = filter_input(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
+
+//we initialize the default error or success message
+$successMessage = "";
 
 //if he accepted an invite, we update the database
 if ($accept) {
     GroupDAO::acceptPendingInvite($accept, $_SESSION['userID']);
+    $successMessage = "Groupe rejoint avec succès";
 }
 //if he deny an invite, we remove it from the database
 if ($deny) {
     GroupDAO::deletePendingInvite($deny, $_SESSION['userID']);
+    $successMessage = "Invitation refusée avec succès";
 }
 
 /**
@@ -46,7 +51,7 @@ function showInvites()
         if ($value['Id_User'] == $_SESSION['userID']) {
             //we increment our counter
             $countUserInvite++;
-            echo "<tr><td>" . GroupDAO::getGroupById($value['Id_Group'])['Nm_Group'] . " vous a invité a rejoindre son groupe!</td><td><button class=\"btn btn-success\" type=\"submit\" value=\" " . $value['Id_Group'] . "\" name=\"accept\">✓</button></td><td><button class=\"btn btn-danger\" type=\"submit\" value=\" " . $value['Id_Group'] . "\" name=\"delete\">X</button></td></tr>";
+            echo "<tr><td>Vous avez été invité à rejoindre le groupe " . GroupDAO::getGroupById($value['Id_Group'])['Nm_Group'] . " !</td><td><button class=\"btn btn-success\" type=\"submit\" value=\" " . $value['Id_Group'] . "\" name=\"accept\">✓</button></td><td><button class=\"btn btn-danger\" type=\"submit\" value=\" " . $value['Id_Group'] . "\" name=\"delete\">X</button></td></tr>";
         }
     }
     //if our user have 0 invites, we show him a message telling him to comme back later to check if he got a new invite

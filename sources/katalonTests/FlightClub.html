@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>FlightClub</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ShowHomePage</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Flight Club Un carnet de vol disponible partout dans le monde</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AccessToFAQ</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=FAQ<datalist><option>link=FAQ</option><option>//a[contains(text(),'FAQ')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=faq')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Frequently Asked Questions (FAQ) Les réponses à vos questions</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessRegister</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=S'enregistrer<datalist><option>link=S'enregistrer</option><option>//div[@id='navcol-1']/ul/li[4]/a</option><option>//a[contains(@href, '?page=register')]</option><option>//li[4]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testRegister@test.com</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>type</td><td>id=password2<datalist><option>id=password2</option><option>name=password2</option><option>//input[@id='password2']</option><option>//div[3]/input</option><option>css=#password2</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Se connecter Connectez vous pour enregistrer vos vols</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ErrorSameEmailRegister</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=S'enregistrer<datalist><option>link=S'enregistrer</option><option>//div[@id='navcol-1']/ul/li[4]/a</option><option>//a[contains(@href, '?page=register')]</option><option>//li[4]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testRegister@test.com</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>type</td><td>id=password2<datalist><option>id=password2</option><option>name=password2</option><option>//input[@id='password2']</option><option>//div[3]/input</option><option>css=#password2</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Erreur ! L'email existe déjà</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ErrorNotSamePasswordRegister</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=S'enregistrer<datalist><option>link=S'enregistrer</option><option>//div[@id='navcol-1']/ul/li[4]/a</option><option>//a[contains(@href, '?page=register')]</option><option>//li[4]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testEmail@test.com</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>type</td><td>id=password2<datalist><option>id=password2</option><option>name=password2</option><option>//input[@id='password2']</option><option>//div[3]/input</option><option>css=#password2</option></datalist></td><td>AsdfAsdf123_asdf</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Erreur ! Les mots de passes ne sont pas identiques !</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ErrorShortPasswordRegister</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=S'enregistrer<datalist><option>link=S'enregistrer</option><option>//div[@id='navcol-1']/ul/li[4]/a</option><option>//a[contains(@href, '?page=register')]</option><option>//li[4]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testEmail@test.com</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>a</td>
+</tr>
+<tr><td>type</td><td>id=password2<datalist><option>id=password2</option><option>name=password2</option><option>//input[@id='password2']</option><option>//div[3]/input</option><option>css=#password2</option></datalist></td><td>a</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Erreur ! Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial et faire 8 caractère ou plus!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessLogin</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Se connecter<datalist><option>link=Se connecter</option><option>//a[contains(text(),'Se connecter')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=login')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//form/div<datalist><option>//form/div</option><option>css=div.mb-3</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testRegister@test.com</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>AsdfAsdf123_</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Se déconnecter</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ErrorLogin</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Se connecter<datalist><option>link=Se connecter</option><option>//a[contains(text(),'Se connecter')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=login')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>testRegister@test.com</td>
+</tr>
+<tr><td>click</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[2]/input</option><option>css=#password</option></datalist></td><td>jfajhjhffjffkjfdijo</td>
+</tr>
+<tr><td>click</td><td>//button[@type='submit']<datalist><option>//button[@type='submit']</option><option>//form/button</option><option>css=button.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Erreur ! Mauvais mot de passe ou email !</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessAddFlight(Not Functionnal)</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter un vol<datalist><option>link=Ajouter un vol</option><option>//a[contains(text(),'Ajouter un vol')]</option><option>//a[contains(@href, '?page=addFlight')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=No_Flight<datalist><option>id=No_Flight</option><option>name=No_Flight</option><option>//input[@id='No_Flight']</option><option>//input</option><option>css=#No_Flight</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=No_Flight<datalist><option>id=No_Flight</option><option>name=No_Flight</option><option>//input[@id='No_Flight']</option><option>//input</option><option>css=#No_Flight</option></datalist></td><td>vfr</td>
+</tr>
+<tr><td>click</td><td>id=Dttm_Departure<datalist><option>id=Dttm_Departure</option><option>name=Dttm_Departure</option><option>//input[@id='Dttm_Departure']</option><option>//div[3]/input</option><option>css=#Dttm_Departure</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Dttm_Departure<datalist><option>id=Dttm_Departure</option><option>name=Dttm_Departure</option><option>//input[@id='Dttm_Departure']</option><option>//div[3]/input</option><option>css=#Dttm_Departure</option></datalist></td><td>2021-05-13T08:33</td>
+</tr>
+<tr><td>click</td><td>id=Dttm_Arrival<datalist><option>id=Dttm_Arrival</option><option>name=Dttm_Arrival</option><option>//input[@id='Dttm_Arrival']</option><option>//div[4]/input</option><option>css=#Dttm_Arrival</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Dttm_Arrival<datalist><option>id=Dttm_Arrival</option><option>name=Dttm_Arrival</option><option>//input[@id='Dttm_Arrival']</option><option>//div[4]/input</option><option>css=#Dttm_Arrival</option></datalist></td><td>2021-05-13T12:39</td>
+</tr>
+<tr><td>click</td><td>//section/div<datalist><option>//section/div</option><option>css=section.clean-block.clean-form.dark &gt; div.container</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=Tm_Engine_On<datalist><option>id=Tm_Engine_On</option><option>name=Tm_Engine_On</option><option>//input[@id='Tm_Engine_On']</option><option>//div[5]/input</option><option>css=#Tm_Engine_On</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Tm_Engine_On<datalist><option>id=Tm_Engine_On</option><option>name=Tm_Engine_On</option><option>//input[@id='Tm_Engine_On']</option><option>//div[5]/input</option><option>css=#Tm_Engine_On</option></datalist></td><td>08:30</td>
+</tr>
+<tr><td>click</td><td>id=Tm_Engine_Off<datalist><option>id=Tm_Engine_Off</option><option>name=Tm_Engine_Off</option><option>//input[@id='Tm_Engine_Off']</option><option>//div[6]/input</option><option>css=#Tm_Engine_Off</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Tm_Engine_Off<datalist><option>id=Tm_Engine_Off</option><option>name=Tm_Engine_Off</option><option>//input[@id='Tm_Engine_Off']</option><option>//div[6]/input</option><option>css=#Tm_Engine_Off</option></datalist></td><td>12:43</td>
+</tr>
+<tr><td>click</td><td>//section/div<datalist><option>//section/div</option><option>css=section.clean-block.clean-form.dark &gt; div.container</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=Nm_Plane<datalist><option>id=Nm_Plane</option><option>name=Nm_Plane</option><option>//input[@id='Nm_Plane']</option><option>//div[7]/input</option><option>css=#Nm_Plane</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Nm_Plane<datalist><option>id=Nm_Plane</option><option>name=Nm_Plane</option><option>//input[@id='Nm_Plane']</option><option>//div[7]/input</option><option>css=#Nm_Plane</option></datalist></td><td>F-5E</td>
+</tr>
+<tr><td>type</td><td>id=No_Plane<datalist><option>id=No_Plane</option><option>name=No_Plane</option><option>//input[@id='No_Plane']</option><option>//div[8]/input</option><option>css=#No_Plane</option></datalist></td><td>J-3090</td>
+</tr>
+<tr><td>type</td><td>id=Cd_ICAO_Departure<datalist><option>id=Cd_ICAO_Departure</option><option>name=Cd_ICAO_Departure</option><option>//input[@id='Cd_ICAO_Departure']</option><option>//div[9]/input</option><option>css=#Cd_ICAO_Departure</option></datalist></td><td>lsmm</td>
+</tr>
+<tr><td>type</td><td>id=Cd_ICAO_Arrival<datalist><option>id=Cd_ICAO_Arrival</option><option>name=Cd_ICAO_Arrival</option><option>//input[@id='Cd_ICAO_Arrival']</option><option>//div[10]/input</option><option>css=#Cd_ICAO_Arrival</option></datalist></td><td>lsme</td>
+</tr>
+<tr><td>type</td><td>id=Cd_ICAO_Departure<datalist><option>id=Cd_ICAO_Departure</option><option>name=Cd_ICAO_Departure</option><option>//input[@id='Cd_ICAO_Departure']</option><option>//div[9]/input</option><option>css=#Cd_ICAO_Departure</option></datalist></td><td>lsme</td>
+</tr>
+<tr><td>type</td><td>id=Cd_Flight_Type<datalist><option>id=Cd_Flight_Type</option><option>name=Cd_Flight_Type</option><option>//input[@id='Cd_Flight_Type']</option><option>//div[11]/input</option><option>css=#Cd_Flight_Type</option></datalist></td><td>Formation</td>
+</tr>
+<tr><td>type</td><td>id=Cd_Flight_Mode<datalist><option>id=Cd_Flight_Mode</option><option>name=Cd_Flight_Mode</option><option>//input[@id='Cd_Flight_Mode']</option><option>//div[12]/input</option><option>css=#Cd_Flight_Mode</option></datalist></td><td>solo</td>
+</tr>
+<tr><td>type</td><td>id=Txt_Meteo<datalist><option>id=Txt_Meteo</option><option>name=Txt_Meteo</option><option>//textarea[@id='Txt_Meteo']</option><option>//textarea</option><option>css=#Txt_Meteo</option></datalist></td><td>cavok</td>
+</tr>
+<tr><td>type</td><td>id=Nb_Passengers<datalist><option>id=Nb_Passengers</option><option>name=Nb_Passengers</option><option>//input[@id='Nb_Passengers']</option><option>//div[14]/input</option><option>css=#Nb_Passengers</option></datalist></td><td>0</td>
+</tr>
+<tr><td>type</td><td>id=Txt_Note<datalist><option>id=Txt_Note</option><option>name=Txt_Note</option><option>//textarea[@id='Txt_Note']</option><option>//div[15]/textarea</option><option>css=#Txt_Note</option></datalist></td><td>guete fluge</td>
+</tr>
+<tr><td>click</td><td>name=media[]<datalist><option>name=media[]</option><option>//input[@name='media[]']</option><option>//div[16]/input</option><option>css=input[name="media[]"]</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>name=media[]<datalist><option>name=media[]</option><option>//input[@name='media[]']</option><option>//div[16]/input</option><option>css=input[name="media[]"]</option></datalist></td><td>C:\fakepath\DualTakeOff.png</td>
+</tr>
+<tr><td>click</td><td>name=AddFlight<datalist><option>name=AddFlight</option><option>//button[@name='AddFlight']</option><option>//form/button</option><option>css=button[name="AddFlight"]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Vol enregistrer avec succès!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessAccessMyFlights</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes vols<datalist><option>link=Mes vols</option><option>//a[contains(text(),'Mes vols')]</option><option>//a[contains(@href, '?page=myFlights')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Vos vols Total des heures</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessDetailFlight</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes vols<datalist><option>link=Mes vols</option><option>//a[contains(text(),'Mes vols')]</option><option>//a[contains(@href, '?page=myFlights')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Détails<datalist><option>link=Détails</option><option>//a[contains(text(),'Détails')]</option><option>//a[contains(@href, '?page=logbookDetail&amp;id=35')]</option><option>//td[13]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Détails du vol Votre vol en détail  Aéronef</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessEditFlight</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes vols<datalist><option>link=Mes vols</option><option>//a[contains(text(),'Mes vols')]</option><option>//a[contains(@href, '?page=myFlights')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Editer le vol<datalist><option>link=Editer le vol</option><option>//a[contains(text(),'Editer le vol')]</option><option>//a[contains(@href, '?page=logbookEdit&amp;id=35')]</option><option>//td[14]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=Cd_ICAO_Arrival<datalist><option>id=Cd_ICAO_Arrival</option><option>name=Cd_ICAO_Arrival</option><option>//input[@id='Cd_ICAO_Arrival']</option><option>//table[2]/tbody/tr/td[2]/div/input</option><option>css=#Cd_ICAO_Arrival</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Cd_ICAO_Arrival<datalist><option>id=Cd_ICAO_Arrival</option><option>name=Cd_ICAO_Arrival</option><option>//input[@id='Cd_ICAO_Arrival']</option><option>//table[2]/tbody/tr/td[2]/div/input</option><option>css=#Cd_ICAO_Arrival</option></datalist></td><td>LSMp</td>
+</tr>
+<tr><td>click</td><td>id=No_Plane<datalist><option>id=No_Plane</option><option>name=No_Plane</option><option>//input[@id='No_Plane']</option><option>//td[2]/div/input</option><option>css=#No_Plane</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=Nm_Plane<datalist><option>id=Nm_Plane</option><option>name=Nm_Plane</option><option>//input[@id='Nm_Plane']</option><option>//input</option><option>css=#Nm_Plane</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Nm_Plane<datalist><option>id=Nm_Plane</option><option>name=Nm_Plane</option><option>//input[@id='Nm_Plane']</option><option>//input</option><option>css=#Nm_Plane</option></datalist></td><td>F-5E3</td>
+</tr>
+<tr><td>click</td><td>//section<datalist><option>//section</option><option>css=section.clean-block.clean-form.dark</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=Txt_Meteo<datalist><option>id=Txt_Meteo</option><option>name=Txt_Meteo</option><option>//textarea[@id='Txt_Meteo']</option><option>//textarea</option><option>css=#Txt_Meteo</option></datalist></td><td>sct</td>
+</tr>
+<tr><td>click</td><td>name=btnModify<datalist><option>name=btnModify</option><option>//button[@name='btnModify']</option><option>//form/button</option><option>css=button[name="btnModify"]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Vol modifié avec succès!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessPDFDownload</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Télécharger en PDF<datalist><option>link=Télécharger en PDF</option><option>//a[contains(text(),'Télécharger en PDF')]</option><option>//a[contains(@href, '?page=downloadPdf')]</option><option>//td[3]/a</option><option>css=a.btn.btn-danger</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Carnet de vol de</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessCSVDownload</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol<datalist><option>link=Carnet de vol</option><option>//a[contains(text(),'Carnet de vol')]</option><option>//div[@id='navcol-1']/ul/li[2]/a</option><option>//a[contains(@href, '?page=logbook')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Télécharger en CSV<datalist><option>link=Télécharger en CSV</option><option>//a[contains(text(),'Télécharger en CSV')]</option><option>//a[contains(@href, '?page=downloadCsv')]</option><option>//td[4]/a</option><option>css=a.btn.btn-success</option></datalist></td><td></td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessAddGroup</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Créer un groupe<datalist><option>link=Créer un groupe</option><option>//a[contains(text(),'Créer un groupe')]</option><option>//a[contains(@href, '?page=CreateGroups')]</option><option>//td[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td>super groupe trop cool</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Créer']<datalist><option>//input[@value='Créer']</option><option>//div[2]/input</option><option>css=input.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Groupe créer avec succès!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessLeaveGroup</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes groupes<datalist><option>link=Mes groupes</option><option>//a[contains(text(),'Mes groupes')]</option><option>//a[contains(@href, '?page=myGroupes')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=delete<datalist><option>name=delete</option><option>//button[@name='delete']</option><option>//div[2]/button</option><option>css=button[name="delete"]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Vous avez quitter le groupe!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessInviteUserToGroup</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes groupes<datalist><option>link=Mes groupes</option><option>//a[contains(text(),'Mes groupes')]</option><option>//a[contains(@href, '?page=myGroupes')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Plus d'infos<datalist><option>link=Plus d'infos</option><option>//a[contains(@href, '?page=aboutGroup&amp;id=7')]</option><option>//div[2]/a</option><option>css=a.btn.btn-outline-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Inviter un membre<datalist><option>link=Inviter un membre</option><option>//a[contains(text(),'Inviter un membre')]</option><option>//a[contains(@href, '?page=InviteAMember&amp;idGroup=7')]</option><option>//td[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>brian.gl@eduge.ch</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Inviter un membre']<datalist><option>//input[@value='Inviter un membre']</option><option>//form/input</option><option>css=input.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Utilisateur invité!</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ErrorInviteUserToGroup</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes groupes<datalist><option>link=Mes groupes</option><option>//a[contains(text(),'Mes groupes')]</option><option>//a[contains(@href, '?page=myGroupes')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Plus d'infos<datalist><option>link=Plus d'infos</option><option>//a[contains(@href, '?page=aboutGroup&amp;id=7')]</option><option>//div[2]/a</option><option>css=a.btn.btn-outline-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Inviter un membre<datalist><option>link=Inviter un membre</option><option>//a[contains(text(),'Inviter un membre')]</option><option>//a[contains(@href, '?page=InviteAMember&amp;idGroup=7')]</option><option>//td[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//input</option><option>css=#email</option></datalist></td><td>nonexistinguser@randommail.com</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Inviter un membre']<datalist><option>//input[@value='Inviter un membre']</option><option>//form/input</option><option>css=input.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessAcceptInvitation</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes invitations<datalist><option>link=Mes invitations</option><option>//a[contains(text(),'Mes invitations')]</option><option>//a[contains(@href, '?page=invite')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=accept<datalist><option>name=accept</option><option>//button[@name='accept']</option><option>//td[2]/button</option><option>css=button[name="accept"]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>super groupe trop cool</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessDenyInvitation</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes invitations<datalist><option>link=Mes invitations</option><option>//a[contains(text(),'Mes invitations')]</option><option>//a[contains(@href, '?page=invite')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=delete<datalist><option>name=delete</option><option>//button[@name='delete']</option><option>//td[3]/button</option><option>css=button[name="delete"]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Succès ! Invitation refusée avec succès</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessSeeGroupUserList</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes groupes<datalist><option>link=Mes groupes</option><option>//a[contains(text(),'Mes groupes')]</option><option>//a[contains(@href, '?page=myGroupes')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Plus d'infos<datalist><option>link=Plus d'infos</option><option>//a[contains(@href, '?page=aboutGroup&amp;id=8')]</option><option>//div[2]/a</option><option>css=a.btn.btn-outline-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Liste des membres<datalist><option>link=Liste des membres</option><option>//a[contains(text(),'Liste des membres')]</option><option>//a[contains(@href, '?page=MemberList&amp;idGroup=8')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyTextPresent</td><td><datalist><option></option></datalist></td><td>Toutes les utilisateures du groupe "</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SuccessGroupLogBookAccess</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage<datalist><option>http://127.0.0.1/edsa-git/Flight-Club/sources/index.php?page=homepage</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Groupes<datalist><option>link=Groupes</option><option>//a[contains(text(),'Groupes')]</option><option>//div[@id='navcol-1']/ul/li[3]/a</option><option>//a[contains(@href, '?page=GroupMenu')]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Mes groupes<datalist><option>link=Mes groupes</option><option>//a[contains(text(),'Mes groupes')]</option><option>//a[contains(@href, '?page=myGroupes')]</option><option>//td[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Plus d'infos<datalist><option>link=Plus d'infos</option><option>//a[contains(@href, '?page=aboutGroup&amp;id=8')]</option><option>//div[2]/a</option><option>css=a.btn.btn-outline-primary</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Carnet de vol du groupe<datalist><option>link=Carnet de vol du groupe</option><option>//a[contains(text(),'Carnet de vol du groupe')]</option><option>//a[contains(@href, '?page=GroupLogBook&amp;idGroup=8')]</option><option>//td/a</option><option>css=a.btn.btn-primary</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
