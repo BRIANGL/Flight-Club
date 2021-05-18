@@ -1,21 +1,4 @@
 <?php
-//============================================================+
-// File name   : DownloadPDF.php
-// Begin       : 07-05-2021
-// Last Update : 07-05-2021
-//
-// Description : 
-//               Colored Table (very simple table)
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
-
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/07/04)

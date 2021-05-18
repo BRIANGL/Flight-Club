@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * Database connection data
+ */
 const DB_NAME = "flightclub";
 const DB_HOST = "localhost";
 const DB_USER = "FlighcClubDbUser";

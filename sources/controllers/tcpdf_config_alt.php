@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * TCPDF Constant initialization here
+ */
 
 /**
  * Define the following constant to ignore the default configuration file.

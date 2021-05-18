@@ -3,7 +3,7 @@
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
- * group menu logic here
+ * user logbook logic here
  */
 require_once "./sql/userDAO.php";
 require_once "./sql/flightDAO.php";

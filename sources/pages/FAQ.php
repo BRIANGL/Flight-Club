@@ -1,3 +1,10 @@
+<?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * FAQ page here
+ */
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -62,6 +69,10 @@
                                     <tr>
                                         <td>J'ai mis un mot de passe érroné, puis-je le changer?</td>
                                         <td>Oui, pour le changer, il faut aller sous: "Modifier mon profile" et remplire les champs demandés</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Si j'entre 2 vols qui se passent en même temps, est-ce qu'un vol seras annulé ou supprimé?</td>
+                                        <td>Non, Vous pouvez enregistrer autant de vols que vous voulez dans la même période de temps qu'un autre vol</td>
                                     </tr>
                                     <tr>
                                         <td>J'ai une question technique, qui doit-je contacter?</td>

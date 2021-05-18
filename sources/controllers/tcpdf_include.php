@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * TCPDF config here
+ */
 require_once('tcpdf_config_alt.php');
 
 // Include the main TCPDF library (search the library on the following directories).

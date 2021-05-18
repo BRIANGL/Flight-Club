@@ -2,7 +2,7 @@
 /**
  * @author GOLAY Brian
  * @version 1.0 (2021/05/04)
- * group menu logic here
+ * user menu logic here
  */
 require_once "./sql/userDAO.php";
 

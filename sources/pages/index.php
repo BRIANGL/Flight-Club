@@ -1,3 +1,10 @@
+<?php
+/**
+ * @author GOLAY Brian
+ * @version 1.0 (2021/05/04)
+ * Homepage page
+ */
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
