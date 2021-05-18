@@ -30,21 +30,20 @@ DROP TABLE IF EXISTS `flightclub`.`tbl_flight` ;
 
 CREATE TABLE IF NOT EXISTS `flightclub`.`tbl_flight` (
   `Id_Flight` INT NOT NULL AUTO_INCREMENT,
-  `No_Flight` VARCHAR(45) NOT NULL,
-  `Dt_Flight` DATE NOT NULL,
-  `Tm_Departure` TIME NOT NULL,
-  `Tm_Arrival` TIME NOT NULL,
-  `Tm_Engine_On` TIME NULL DEFAULT NULL,
-  `Tm_Engine_Off` TIME NULL DEFAULT NULL,
-  `Nm_Plane` VARCHAR(45) NOT NULL,
-  `No_Plane` VARCHAR(45) NOT NULL,
-  `Cd_ICAO_Departure` CHAR(4) NOT NULL,
-  `Cd_ICAO_Arrival` CHAR(4) NOT NULL,
-  `Cd_Flight_Type` VARCHAR(45) NOT NULL,
-  `Cd_Flight_Mode` VARCHAR(45) NOT NULL,
-  `Txt_Meteo` TEXT NOT NULL,
-  `Nb_Passengers` INT NOT NULL,
-  `Txt_Note` TEXT NULL DEFAULT NULL,
+  `No_Flight` varchar(45) NOT NULL,
+  `Dttm_Departure` datetime NOT NULL,
+  `Dttm_Arrival` datetime NOT NULL,
+  `Tm_Engine_On` time DEFAULT NULL,
+  `Tm_Engine_Off` time DEFAULT NULL,
+  `Nm_Plane` varchar(45) NOT NULL,
+  `No_Plane` varchar(45) NOT NULL,
+  `Cd_ICAO_Departure` char(4) NOT NULL,
+  `Cd_ICAO_Arrival` char(4) NOT NULL,
+  `Cd_Flight_Type` varchar(45) NOT NULL,
+  `Cd_Flight_Mode` varchar(45) NOT NULL,
+  `Txt_Meteo` text NOT NULL,
+  `Nb_Passengers` int(11) NOT NULL,
+  `Txt_Note` text
   PRIMARY KEY (`Id_Flight`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -92,8 +91,7 @@ DROP TABLE IF EXISTS `flightclub`.`tbl_user` ;
 CREATE TABLE IF NOT EXISTS `flightclub`.`tbl_user` (
   `Id_User` INT NOT NULL AUTO_INCREMENT,
   `Txt_Email` VARCHAR(100) NOT NULL,
-  `Txt_Password_Hash` VARCHAR(128) NOT NULL,
-  `Txt_Password_Salt` VARCHAR(60) NOT NULL,
+  `Txt_Password_Hash` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`Id_User`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

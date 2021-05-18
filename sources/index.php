@@ -49,7 +49,7 @@ if (isset($page)) {
         case 'homepage':
             require("./pages/Index.php");
             break;
-        case 'GroupMenu':
+        case 'groupMenu':
             require("./pages/GroupMenu.php");
             break;
         case 'invite':
@@ -58,7 +58,7 @@ if (isset($page)) {
         case 'myGroupes':
             require("./pages/MyGroup.php");
             break;
-        case 'CreateGroups':
+        case 'createGroups':
             require("./pages/GroupCreate.php");
             break;
         case 'aboutGroup':
@@ -79,7 +79,7 @@ if (isset($page)) {
         case 'addFlight':
             require("./pages/UserAddFlight.php");
             break;
-        case 'GroupLogBook':
+        case 'groupLogBook':
             require("./pages/GroupLogBook.php");
             break;
         case 'logbookDetail':

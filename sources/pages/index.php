@@ -51,7 +51,7 @@
                             </div>
                             <?php
                     if ($_SESSION['connected']) { ?>
-                        <a class="btn btn-outline-primary btn-lg" href="?page=GroupMenu">Rejoindre un groupe</a>
+                        <a class="btn btn-outline-primary btn-lg" href="?page=groupMenu">Rejoindre un groupe</a>
                     <?php
                     } else { ?>
                         <a class="btn btn-outline-primary btn-lg" href="?page=login">Rejoindre un groupe</a>

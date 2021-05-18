@@ -43,7 +43,7 @@ require_once("./controllers/groupMenu_controller.php");
                             <tr>
                                 <td><a href="?page=invite" class="btn btn-primary">Mes invitations</a></td>
                                 <td><a href="?page=myGroupes" class="btn btn-primary">Mes groupes</a></td>
-                                <td><a href="?page=CreateGroups" class="btn btn-primary">Créer un groupe</a></td>
+                                <td><a href="?page=createGroups" class="btn btn-primary">Créer un groupe</a></td>
                             </tr>
                         </table>                        
                     </form>

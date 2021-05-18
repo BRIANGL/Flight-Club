@@ -13,7 +13,7 @@
                 } else {
                 ?>
                     <li class="nav-item"><a class="nav-link" href="?page=logbook">Carnet de vol</a></li>
-                    <li class="nav-item"><a class="nav-link" href="?page=GroupMenu">Groupes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?page=groupMenu">Groupes</a></li>
                     <li class="nav-item"><a class="nav-link" href="?page=userModify">Modifier mon profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="?page=faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="?page=logout">Se déconnecter</a></li>

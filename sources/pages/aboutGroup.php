@@ -42,7 +42,7 @@ require_once("./controllers/aboutGroup_controller.php");
                     <form method="" action="">
                         <table>
                             <tr>
-                                <td><a href="?page=GroupLogBook&idGroup=<?=$idGroup?>" class="btn btn-primary">Carnet de vol du groupe</a></td>
+                                <td><a href="?page=groupLogBook&idGroup=<?=$idGroup?>" class="btn btn-primary">Carnet de vol du groupe</a></td>
                                 <td><a href="?page=MemberList&idGroup=<?=$idGroup?>" class="btn btn-primary">Liste des membres</a></td>
                                 <td><a href="?page=InviteAMember&idGroup=<?=$idGroup?>" class="btn btn-primary">Inviter un membre</a></td>
                             </tr>
