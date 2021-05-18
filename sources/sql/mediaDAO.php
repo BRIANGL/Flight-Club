@@ -49,24 +49,6 @@ class MediaDAO
         ));
     }
 
-
-    public static function readAll_media()
-    {
-        try {
-            $sql = "SELECT * FROM `media`";
-            $db =  DBConnection::getConnection();
-            $db->beginTransaction();
-            $query = $db->prepare($sql);
-
-            $query->execute();
-            $db->commit();
-            return $query->fetchAll();
-        } catch (\Throwable $th) {
-            $th->getMessage();
-            $db->rollBack();
-        }
-    }
-
     /**
      * Get all the data from a picture id
      *
@@ -152,29 +134,4 @@ class MediaDAO
             ':id' => $idMedia,
         ]);
     }
-
-    public static function readMediaLinkById($idPost)
-    {
-        $db = DBConnection::getConnection();
-        $sql = "SELECT `pathImg` FROM `media` WHERE `media`.`idPost` = :id";
-        $q = $db->prepare($sql);
-        $q->execute([
-            ':id' => $idPost,
-        ]);
-        $result = $q->fetchAll();
-        return $result;
-    }
-
-    public static function GetView($idMedia)
-    {
-        $db = DBConnection::getConnection();
-        $sql = "SELECT `nbCliques` FROM `media` WHERE `media`.`idMedia` = :id";
-        $q = $db->prepare($sql);
-        $q->execute([
-            ':id' => $idMedia,
-        ]);
-        $result = $q->fetch();
-        return $result;
-    }
-    #endregion
 }

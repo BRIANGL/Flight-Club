@@ -21,6 +21,9 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
+//we hide error to the user to only show our custom errors
+error_reporting(0);
+
 //filter the id from the url
 $flightId = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 //we filter the user input
@@ -43,7 +46,7 @@ $btn = filter_input(INPUT_POST, 'btnModify', FILTER_SANITIZE_STRING);
 $imgToDelete = filter_input(INPUT_POST, 'deletedImg', FILTER_SANITIZE_STRING);
 
 $validTime = true;
-$engineTime = false;
+$engineTime = true;
 
 $goodDateTimeDepartureFormat = "";
 $goodDateTimeArrivalFormat = "";
@@ -145,7 +148,7 @@ if (!empty($btn)) {
             $timeEngineOn = null;
         }
     } else {
-        $message[] = "L'heure saisie n'est pas valide";
+        $message[] = "La date et l'heure saisie ne sont pas valides";
     }
     if ($validTime && $engineTime) {
         //check that the type of aircraft doesn't blow the database
@@ -232,16 +235,34 @@ if (!empty($btn)) {
 
         //we check if there is some images to delete
         if (!empty($imgToDelete)) {
+
+            $isAllowedToDeletePicture = false;
+
+            
+
+
             DBConnection::startTransaction();
             $imgToDelete = explode(",", $imgToDelete);
             unset($imgToDelete[count($imgToDelete) - 1]);
-            $pathToDelete = "";
+            $pictureData = "";
             // we try to remove each image
             try {
                 foreach ($imgToDelete as $key => $value) {
-                    $pathToDelete = MediaDAO::read_media_by_id($value);
-                    MediaDAO::del_mediaByIdMedia($value);
-                    unlink($pathToDelete['Txt_File_Path']);
+                    $pictureData = MediaDAO::read_media_by_id($value);
+
+                    if (userDAO::getUserByFlightID($pictureData['Id_Flight'])['Id_User'] == $_SESSION['userID']) {
+                        $isAllowedToDeletePicture = true;
+                    }else {
+                        $isAllowedToDeletePicture = false;
+                    }
+
+                    if ($isAllowedToDeletePicture) {
+                        MediaDAO::del_mediaByIdMedia($value);
+                    unlink($pictureData['Txt_File_Path']);
+                    }else {
+                        $message[] = "Vous n'avez pas la permission de supprimer l'image!";
+                    }
+                    
                 }
                 DBConnection::commit();
             } catch (\Throwable $th) {//if there was an error, we rollback
