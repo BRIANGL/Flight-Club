@@ -88,7 +88,6 @@ $message = array();
 $successMessage = "";
 //if all data are not empty
 if (!empty($btn)) {
-    /*NEW*/
 
     if (
         !empty($role) && !empty($flight) && !empty($dateDeparture) && !empty($dateArrival) &&
@@ -177,7 +176,7 @@ if (!empty($btn)) {
         $message[] = "Les notes sonts trop longues";
     }
 
-    /*ENDNEW*/
+    //we check that every data is ok
     if (empty($message)) {
 
         //we check with is the latest id in the database
@@ -198,6 +197,7 @@ if (!empty($btn)) {
             $dateArrival = explode("T", $dateArrival);
             $dateArrival = $dateArrival[0] . " " . $dateArrival[1];
 
+            //we add the flight
             FlightDAO::addFlight(
                 $idFlight,
                 $_SESSION['userID'],
@@ -217,9 +217,10 @@ if (!empty($btn)) {
                 $passengers,
                 $notes
             );
+            //we show a success message
             $successMessage = "Vol enregistrer avec succès!";
-        } catch (\Throwable $th) {
-            $message = "Une erreure est survenue. merci de réessayer";
+        } catch (\Throwable $th) {//we show an error message
+            $message = "Une erreure est survenue. Merci de réessayer";
         }
             ////FILE UPLOAD
 

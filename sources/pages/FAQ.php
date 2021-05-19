@@ -75,6 +75,10 @@
                                         <td>Non, Vous pouvez enregistrer autant de vols que vous voulez dans la même période de temps qu'un autre vol</td>
                                     </tr>
                                     <tr>
+                                        <td>Je n'ai que l'heure de démarrage moteur, est-ce que je peut l'enregistrer</td>
+                                        <td>Oui mais vous devez aussi mettre une heure d'arret moteur. Sans quoi, l'heure ne seras pas enregistrée</td>
+                                    </tr>
+                                    <tr>
                                         <td>J'ai une question technique, qui doit-je contacter?</td>
                                         <td>Si vous avez une questions, contactez nous par mail à l'adresse suivante: admin@flightclub.ch</td>
                                     </tr>

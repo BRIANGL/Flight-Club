@@ -191,6 +191,7 @@ if (!empty($btn)) {
         $message[] = "Les notes sonts trop longues";
     }
 
+    //we check that every data is ok
     if (empty($message)) {
 
         //we check with is the latest id in the database
@@ -225,11 +226,12 @@ if (!empty($btn)) {
                 $passengers,
                 $notes
             );
+             //we show a success message
             $successMessage = "Vol modifié avec succès!";
 
             //we get the new data to show to the user
             $userFlight = FlightDAO::getFlightById($flightId);
-        } catch (\Throwable $th) {
+        } catch (\Throwable $th) { //we show an error message
             $message = "Une erreure est survenue. merci de réessayer";
         }
 

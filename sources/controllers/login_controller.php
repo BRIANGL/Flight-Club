@@ -31,7 +31,7 @@ if (!empty($email) && !empty($password)) {
         //we connect the user in session
         $_SESSION['connected'] = true;
         $_SESSION['userID'] = userDAO::getUserByEmail($email)['Id_User'];
-        $message = "Succesfully logged";
+        $message = "Connecté avec succès";
         //we redirect the user to the homepage
         header("Location: ./index.php?page=homepage");
         exit();
