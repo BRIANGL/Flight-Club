@@ -1,7 +1,7 @@
 <?php
 /**
  * @author GOLAY Brian
- * @version 1.0 (2021/05/04)
+ * @version 1.0 (2021/05/20)
  * Database connection functions
  */
 namespace FlightClub\sql;
@@ -53,11 +53,21 @@ class DBConnection {
     }
 
     //TRANSACTION
+    /**
+     * Begin a transaction
+     *
+     * @return void
+     */
     public static function startTransaction()
     {
         DBConnection::getConnection()->beginTransaction();
     }
 
+    /**
+     * Rollback a transaction
+     *
+     * @return void
+     */
     public static function rollback()
     {
         try {
@@ -67,6 +77,11 @@ class DBConnection {
         }
     }
 
+    /**
+     * Commit a transaction
+     *
+     * @return void
+     */
     public static function commit()
     {
         try {

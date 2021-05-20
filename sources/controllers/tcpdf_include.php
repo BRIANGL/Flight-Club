@@ -1,7 +1,7 @@
 <?php
 /**
  * @author GOLAY Brian
- * @version 1.0 (2021/05/04)
+ * @version 1.0 (2021/05/20)
  * TCPDF config here
  */
 require_once('tcpdf_config_alt.php');

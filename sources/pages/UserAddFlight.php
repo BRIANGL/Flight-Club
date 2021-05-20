@@ -2,7 +2,7 @@
 
 /**
  * @author GOLAY Brian
- * @version 1.0 (2021/05/05)
+ * @version 1.0 (2021/05/20)
  * User logbook add flight page here
  */
 require_once("./controllers/userAddFlight_controller.php");

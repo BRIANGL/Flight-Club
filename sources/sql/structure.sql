@@ -15,7 +15,7 @@ DROP SCHEMA IF EXISTS `flightclub` ;
 -- -----------------------------------------------------
 -- Create user
 -- -----------------------------------------------------
-CREATE USER 'FlighcClubDbUser'@'localhost' IDENTIFIED WITH mysql_native_password AS '***';GRANT USAGE ON *.* TO 'FlighcClubDbUser'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `FlighcClubDbUser\_%`.* TO 'FlighcClubDbUser'@'localhost';GRANT ALL PRIVILEGES ON `flightclub`.* TO 'FlighcClubDbUser'@'localhost';
+CREATE USER 'FlighcClubDbUser'@'localhost' IDENTIFIED BY "JCN_G&c]PD6YLy)@Z1&N^ni?1WJ>*,fkgc.Q0NbT_0BpO1)WgzEu*H.Swdo!Ab^}";GRANT USAGE ON *.* TO 'FlighcClubDbUser'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `FlighcClubDbUser\_%`.* TO 'FlighcClubDbUser'@'localhost';GRANT ALL PRIVILEGES ON `flightclub`.* TO 'FlighcClubDbUser'@'localhost';
 
 -- -----------------------------------------------------
 -- Schema flightclub
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `flightclub`.`tbl_flight` (
   `Cd_Flight_Mode` varchar(45) NOT NULL,
   `Txt_Meteo` text NOT NULL,
   `Nb_Passengers` int(11) NOT NULL,
-  `Txt_Note` text
+  `Txt_Note` text,
   PRIMARY KEY (`Id_Flight`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
